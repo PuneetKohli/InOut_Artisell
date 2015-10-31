@@ -36,8 +36,8 @@ public class ArtisanSearch extends BaseActivity
     @Override
     protected void setupToolbar()
     {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle(R.string.title_activity_artisan_search);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override
@@ -63,15 +63,13 @@ public class ArtisanSearch extends BaseActivity
         mRecyclerView.setAdapter(mAdapter);
 
 
-        mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(this, new RecyclerItemClickListener.OnItemClickListener()
+/*        mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(this, new RecyclerItemClickListener.OnItemClickListener()
         {
             @Override
             public void onItemClick(View view, int position)
             {
-                manager.currentArtisanSelected = manager.artisanList.get(position);
-                navigator.openNewActivity(ArtisanSearch.this, new ArtisanProfileActivity());
             }
-        }));
+        }));*/
 
     }
 

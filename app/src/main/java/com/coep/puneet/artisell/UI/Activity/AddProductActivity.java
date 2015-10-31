@@ -1,10 +1,15 @@
 package com.coep.puneet.artisell.UI.Activity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import com.coep.puneet.artisell.R;
 
@@ -36,6 +41,7 @@ public class AddProductActivity extends BaseActivity
     @Override
     protected void setupToolbar()
     {
+        toolbar.setNavigationIcon(R.drawable.ic_close_white_24dp);
 
     }
 
@@ -55,8 +61,27 @@ public class AddProductActivity extends BaseActivity
     public boolean onOptionsItemSelected(MenuItem item)
     {
         int id = item.getItemId();
-
-        return super.onOptionsItemSelected(item);
+        if (id == android.R.id.home)
+        {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            LayoutInflater inflater = LayoutInflater.from(this);
+            View customDialogView = inflater.inflate(R.layout.profile_popup_edit_details, null, false);
+            final TextView popupEdittext = (TextView) customDialogView.findViewById(R.id.popup_editText);
+            popupEdittext.setText(getString(R.string.alert_leave_add_product));
+            builder.setTitle(getString(R.string.alert_title_confirm));
+            builder.setPositiveButton(getString(R.string.alert_positive_button), new DialogInterface.OnClickListener()
+            {
+                public void onClick(DialogInterface dialog, int whichButton)
+                {
+                    finish();
+                }
+            });
+            builder.setView(customDialogView);
+            builder.create();
+            builder.show();
+            //onBackPressed();
+        }
+        return true;
     }
 
     @Override

@@ -48,8 +48,8 @@ public class ViewProductActivity extends BaseActivity
     @Override
     protected void setupToolbar()
     {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle(R.string.title_activity_view_product);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override

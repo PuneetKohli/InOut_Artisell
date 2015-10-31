@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.coep.puneet.artisell.ParseObjects.Category;
@@ -61,25 +60,26 @@ public class CategoryGridAdapter extends BaseAdapter
 
             // get layout from mobile.xml
             gridView = inflater.inflate(R.layout.category_grid_item, null);
-
-            // set image based on selected text
-            ImageView imageView = (ImageView) gridView
-                    .findViewById(R.id.iv_cat_icon);
-
-
-            TextView textView = (TextView) gridView.findViewById(R.id.tv_cat_name);
-
-            if(categoryList.get(position).getCategory_name().toLowerCase().trim().startsWith("men"))
-            {
-                imageView.setImageDrawable(mContext.getResources().getDrawable(R.drawable.category_mens_clothing));
-            }
             //imageView.setImageResource(mNavIds[position]);
             //imageView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, height / 4));
 
-            textView.setText(categoryList.get(position).getCategory_name());
 
         } else {
             gridView = (View) convertView;
+        }
+
+
+        // set image based on selected text
+        ImageView imageView = (ImageView) gridView
+                .findViewById(R.id.iv_cat_icon);
+
+        String curText = categoryList.get(position).getCategory_name();
+        TextView textView = (TextView) gridView.findViewById(R.id.tv_cat_name);
+        textView.setText(categoryList.get(position).getCategory_name());
+
+        if(categoryList.get(position).getCategory_name().toLowerCase().trim().startsWith("men"))
+        {
+            imageView.setImageDrawable(mContext.getResources().getDrawable(R.drawable.category_mens_clothing));
         }
 
         return gridView;

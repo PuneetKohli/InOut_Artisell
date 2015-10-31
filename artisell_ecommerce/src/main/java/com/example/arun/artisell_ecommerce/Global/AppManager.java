@@ -445,7 +445,15 @@ public class AppManager extends Application
 
     public void tagSearch(ArrayList<String> tags) {
         ParseQuery<Product> query = Product.getQuery();
-        query.whereContainedIn("tags", tags);
+        query.whereContainedIn("product_tags", tags);
 
+        query.findInBackground(new FindCallback<Product>()
+        {
+            @Override
+            public void done(List<Product> objects, ParseException e)
+            {
+                Log.d("Here", "Here");
+            }
+        });
     }
 }

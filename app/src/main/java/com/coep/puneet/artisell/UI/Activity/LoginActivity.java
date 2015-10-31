@@ -95,6 +95,7 @@ public class LoginActivity extends BaseActivity
 
         manager.getAllCategoryLocal();
         manager.getAllEventsLocal();
+        manager.getAllRequestsLocal();
 
     }
 

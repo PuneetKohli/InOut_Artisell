@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.TextView;
 
 import com.coep.puneet.artisell.ParseObjects.Category;
 import com.coep.puneet.artisell.R;
@@ -32,13 +31,16 @@ public class AddProductStep1_category extends WizardStep
 
     @Bind(R.id.category_grid_view) GridView categoryGridview;
 
-    @OnClick(R.id.say) void speak() {
+    @OnClick(R.id.say)
+    void speak()
+    {
         tts = new TextToSpeech(getActivity(), new TextToSpeech.OnInitListener()
         {
             @Override
             public void onInit(int status)
             {
-                if (status == TextToSpeech.SUCCESS && tts != null) {
+                if (status == TextToSpeech.SUCCESS && tts != null)
+                {
 
                     say(getString(R.string.description_select_category));
                     //
@@ -51,11 +53,13 @@ public class AddProductStep1_category extends WizardStep
         });
     }
 
-    private void say(final String s) {
+    private void say(final String s)
+    {
         final HashMap<String, String> map = new HashMap<String, String>(1);
         map.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, AddProductActivity.class.getName());
         tts.speak(s, TextToSpeech.QUEUE_FLUSH, map);
     }
+
     int selectedIndex = -1;
     TextToSpeech tts;
 
@@ -73,14 +77,17 @@ public class AddProductStep1_category extends WizardStep
         ButterKnife.bind(this, v);
         ((AddProductActivity) getActivity()).manager.currentProduct.setCategory(new Category());
 
-        categoryGridview.setAdapter(new CategoryGridAdapter(getActivity(), ((AddProductActivity) getActivity()).manager.productCategories));
+        final CategoryGridAdapter mAdapter = new CategoryGridAdapter(getActivity(), ((AddProductActivity) getActivity()).manager.productCategories);
+        categoryGridview.setAdapter(mAdapter);
         categoryGridview.setOnItemClickListener(new AdapterView.OnItemClickListener()
                                                 {
                                                     @Override
                                                     public void onItemClick(AdapterView<?> parent, View view, int position, long id)
                                                     {
+                                                        mAdapter.updateView(position);
                                                         //view.setBackgroundResource(R.color.signal_green);
-                                                        if (position == selectedIndex)
+
+                                                       /* if (position == selectedIndex)
                                                         {
                                                             ((AddProductActivity) getActivity()).manager.currentProduct.setCategory(new Category());
 
@@ -110,14 +117,14 @@ public class AddProductStep1_category extends WizardStep
                                                                 {
                                                                     View v1 = (View) categoryGridview.getChildAt(i);
                                                                     v1.findViewById(R.id.selected_tick).setVisibility(View.INVISIBLE);
-                        /*ImageView currentImage1 = (ImageView) v1.findViewById(R.id.iv_cat_icon);
-                        currentImage1.getDrawable().clearColorFilter();*/
+                        *//*ImageView currentImage1 = (ImageView) v1.findViewById(R.id.iv_cat_icon);
+                        currentImage1.getDrawable().clearColorFilter();*//*
                                                                     TextView currentLetter1 = (TextView) v1.findViewById(R.id.tv_cat_name);
                                                                     currentLetter1.setTextColor(getResources().getColor(android.R.color.secondary_text_light_nodisable));
                                                                 }
                                                             }
                                                             //notifyCompleted();
-                                                        }
+                                                        }*/
                                                     }
 
                                                 }

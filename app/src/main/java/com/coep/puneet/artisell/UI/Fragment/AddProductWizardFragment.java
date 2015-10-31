@@ -9,6 +9,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -47,11 +48,11 @@ public class AddProductWizardFragment extends WizardFragment
     @Bind(R.id.image_next_button) ImageView nextImage;
     @Bind(R.id.wizard_next_button) TextView nextButton;
     @Bind(R.id.wizard_previous_button) TextView previousButton;
+    @Bind(R.id.step_container) ViewPager mViewPager;
 
     private String mNextButtonText;
     private String mFinishButtonText;
     private String mBackButtonText;
-    private ViewPager mViewPager;
 
     public AddProductWizardFragment()
     {
@@ -68,7 +69,14 @@ public class AddProductWizardFragment extends WizardFragment
     {
         View rootView = inflater.inflate(R.layout.custom_wizard_layout, container, false);
         ButterKnife.bind(this, rootView);
+        mViewPager.setOnTouchListener(new View.OnTouchListener()
+        {
 
+            public boolean onTouch(View arg0, MotionEvent arg1)
+            {
+                return true;
+            }
+        });
         this.nextButton.setText(this.getNextButtonLabel());
         this.previousButton.setText(this.getBackButtonLabel());
         return rootView;

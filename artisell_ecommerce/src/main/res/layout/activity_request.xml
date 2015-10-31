@@ -24,7 +24,7 @@
                 android:layout_height="wrap_content"
                 app:layout_scrollFlags="scroll|enterAlways"/>
 
-            <com.example.arun.artisell_ecommerce.Custom.SlidingTabLayout
+            <com.coep.puneet.artisell_ecommerce.Custom.SlidingTabLayout
                 android:id="@+id/sliding_tabs"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"

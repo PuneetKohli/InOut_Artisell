@@ -1,4 +1,4 @@
-package com.example.arun.artisell_ecommerce;
+package com.coep.puneet.artisell_ecommerce;
 
 import org.junit.Test;
 

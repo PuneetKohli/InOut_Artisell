@@ -6,11 +6,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.coep.puneet.artisell.ParseObjects.Category;
 import com.coep.puneet.artisell.R;
+import com.coep.puneet.artisell.UI.Activity.AddProductActivity;
 
 import java.util.ArrayList;
 
@@ -22,6 +22,7 @@ public class CategoryGridAdapter extends BaseAdapter
     private Context mContext;
     private ArrayList<Category> categoryList;
     private int height;
+    private int setTickPosition = -1;
 
     public CategoryGridAdapter(Context mContext, ArrayList<Category> categoryList)
     {
@@ -70,6 +71,14 @@ public class CategoryGridAdapter extends BaseAdapter
         }
 
 
+        if(position == setTickPosition) {
+            gridView.findViewById(R.id.selected_tick).setVisibility(View.VISIBLE);
+            ((AddProductActivity) mContext).manager.currentProduct.setCategory(((AddProductActivity) mContext).manager.productCategories.get(position));
+        }
+        else {
+            gridView.findViewById(R.id.selected_tick).setVisibility(View.INVISIBLE);
+        }
+
         // set image based on selected text
         ImageView imageView = (ImageView) gridView
                 .findViewById(R.id.iv_cat_icon);
@@ -104,5 +113,11 @@ public class CategoryGridAdapter extends BaseAdapter
         }
 
         return gridView;
+    }
+
+    public void updateView(int position)
+    {
+        this.setTickPosition = position;
+        notifyDataSetChanged();
     }
 }

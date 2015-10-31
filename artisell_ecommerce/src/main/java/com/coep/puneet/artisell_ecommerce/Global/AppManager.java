@@ -42,6 +42,7 @@ public class AppManager extends Application
     public ArrayList<Request> pendingList = new ArrayList<>();
     public ArrayList<Request> doneList = new ArrayList<>();
     public ArrayList<Product> searchProducts = new ArrayList<>();
+    public ArrayList<Product> allProducts = new ArrayList<>();
     public Product currentProduct;
     public AsyncResponse delegate = null;
 
@@ -526,6 +527,23 @@ public class AppManager extends Application
                     delegate.processFinish(LOG_TAG, AppConstants.RESULT_LOGIN_FAIL);
                     //getAllProductsFromCurrentArtisanOffline();
                 }
+            }
+        });
+    }
+
+    public void getAllProducts()
+    {
+        ParseQuery<Product> query = Product.getQuery();
+        query.include("product_category");
+        query.findInBackground(new FindCallback<Product>()
+        {
+            @Override
+            public void done(List<Product> objects, ParseException e)
+            {
+                allProducts.clear();
+                allProducts.addAll(objects);
+                delegate.processFinish(LOG_TAG, AppConstants.RESULT_PRODUCT_LIST);
+
             }
         });
     }

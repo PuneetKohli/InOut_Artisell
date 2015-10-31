@@ -42,5 +42,6 @@
     <string name="alert_leave_add_product">New product will not be saved. Are you sure you want to exit?</string>
     <string name="alert_title_confirm">Confirm exit</string>
     <string name="alert_positive_button">Ok</string>
+    <string name="alert_negative_button">Cancel</string>
 
 </resources>

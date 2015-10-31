@@ -76,6 +76,14 @@ public class AddProductActivity extends BaseActivity
                     finish();
                 }
             });
+            builder.setNegativeButton(getString(R.string.alert_negative_button), new DialogInterface.OnClickListener()
+            {
+                @Override
+                public void onClick(DialogInterface dialog, int which)
+                {
+
+                }
+            });
             builder.setView(customDialogView);
             builder.create();
             builder.show();

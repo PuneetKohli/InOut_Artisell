@@ -50,4 +50,5 @@ public final class AppConstants
     public static final int IMAGE_RESIZE_DIMEN = 800;
 
 
+    public static final String RESULT_REQUEST = "resultRequestList";
 }

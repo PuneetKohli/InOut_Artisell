@@ -15,6 +15,7 @@ import android.util.Log;
 import com.example.arun.artisell_ecommerce.ParseObjects.Category;
 import com.example.arun.artisell_ecommerce.ParseObjects.Events;
 import com.example.arun.artisell_ecommerce.ParseObjects.Product;
+import com.example.arun.artisell_ecommerce.ParseObjects.Request;
 import com.parse.DeleteCallback;
 import com.parse.FindCallback;
 import com.parse.GetCallback;
@@ -37,6 +38,10 @@ public class AppManager extends Application
     public ArrayList<Category> productCategories = new ArrayList<>();
     public ArrayList<Product> currentArtisanProducts = new ArrayList<>();
     public ArrayList<ParseUser> artisanList = new ArrayList<>();
+    public ArrayList<Request> acceptedList = new ArrayList<>();
+    public ArrayList<Request> pendingList = new ArrayList<>();
+    public ArrayList<Request> doneList = new ArrayList<>();
+    public ArrayList<Product> searchProducts = new ArrayList<>();
     public Product currentProduct;
     public AsyncResponse delegate = null;
 
@@ -67,7 +72,7 @@ public class AppManager extends Application
     // * manually changing locale/
     public void setLocale(String lang)
     {
-        if (! "".equals(lang) && ! getBaseContext().getResources().getConfiguration().locale.getLanguage().equals(lang))
+        if (!"".equals(lang) && !getBaseContext().getResources().getConfiguration().locale.getLanguage().equals(lang))
         {
             Log.d("Manager", "Setting locale to " + lang);
             locale = new Locale(lang);
@@ -82,6 +87,7 @@ public class AppManager extends Application
     }
 
     private Locale locale = null;
+
     @Override
     public void onConfigurationChanged(Configuration newConfig)
     {
@@ -98,13 +104,15 @@ public class AppManager extends Application
     private void parseInit()
     {
         ParseObject.registerSubclass(Events.class);
+        ParseObject.registerSubclass(Request.class);
         ParseObject.registerSubclass(Category.class);
         ParseObject.registerSubclass(Product.class);
         Parse.enableLocalDatastore(this);
         Parse.initialize(this, "A2M7yTjp5iULp8xiFXymM29yX2U9bHEKhJdcsJEN", "L7WlExlZM9DoWNQkCCxY8uf7ummyn6cy1yrhnU7U");
     }
 
-    public void getAllCategory() {
+    public void getAllCategory()
+    {
 
         if ((ni != null) && (ni.isConnected()))
         {
@@ -115,11 +123,14 @@ public class AppManager extends Application
                 @Override
                 public void done(final List<Category> list, ParseException e)
                 {
-                    if(e == null)
+                    if (e == null)
                     {
-                        ParseObject.unpinAllInBackground("category_list", list, new DeleteCallback() {
-                            public void done(ParseException e) {
-                                if (e != null) {
+                        ParseObject.unpinAllInBackground("category_list", list, new DeleteCallback()
+                        {
+                            public void done(ParseException e)
+                            {
+                                if (e != null)
+                                {
                                     Log.d(LOG_TAG, e.getMessage());
                                     return;
                                 }
@@ -137,18 +148,21 @@ public class AppManager extends Application
                         delegate.processFinish(LOG_TAG, AppConstants.RESULT_CATEGORY_LIST);
 
                     }
-                    else {
+                    else
+                    {
                         Log.d(LOG_TAG, e.getMessage());
                     }
                 }
             });
         }
-        else {
+        else
+        {
             getAllCategoryLocal();
         }
     }
 
-    public void getAllCategoryLocal() {
+    public void getAllCategoryLocal()
+    {
         ParseQuery<Category> query = Category.getQuery();
         query.orderByAscending("category_name");
         query.fromPin("category_list");
@@ -176,7 +190,8 @@ public class AppManager extends Application
         });
     }
 
-    public void loginArtisan(String mobile) {
+    public void loginArtisan(String mobile)
+    {
 
         if ((ni != null) && (ni.isConnected()))
         {
@@ -307,37 +322,37 @@ public class AppManager extends Application
 
     public void getAllArtisansLocal()
     {
-            ParseQuery<ParseUser> query = ParseUser.getQuery();
-            query.include("user_products");
-            query.include("user_products.product_category");
-            query.whereEqualTo("is_artisan", true);
-            query.fromLocalDatastore();
+        ParseQuery<ParseUser> query = ParseUser.getQuery();
+        query.include("user_products");
+        query.include("user_products.product_category");
+        query.whereEqualTo("is_artisan", true);
+        query.fromLocalDatastore();
 
-            query.findInBackground(new FindCallback<ParseUser>()
+        query.findInBackground(new FindCallback<ParseUser>()
+        {
+            @Override
+            public void done(final List<ParseUser> artisan, ParseException e)
             {
-                @Override
-                public void done(final List<ParseUser> artisan, ParseException e)
+                if (e == null)
                 {
-                    if (e == null)
-                    {
-                        artisanList.clear();
+                    artisanList.clear();
 
-                        for (int i = 0; i < artisan.size(); i++)
-                        {
-                            if (!artisan.get(i).getUsername().equals(ParseUser.getCurrentUser().getUsername()))
-                                artisanList.add(artisan.get(i));
-
-                        }
-                        delegate.processFinish("manager", AppConstants.RESULT_ARTISAN);
-                        getAllArtisans();
-                    }
-                    else
+                    for (int i = 0; i < artisan.size(); i++)
                     {
-                        getAllArtisans();
-                        //getAllProductsFromCurrentArtisanOffline();
+                        if (!artisan.get(i).getUsername().equals(ParseUser.getCurrentUser().getUsername()))
+                            artisanList.add(artisan.get(i));
+
                     }
+                    delegate.processFinish("manager", AppConstants.RESULT_ARTISAN);
+                    getAllArtisans();
                 }
-            });
+                else
+                {
+                    getAllArtisans();
+                    //getAllProductsFromCurrentArtisanOffline();
+                }
+            }
+        });
     }
 
     public void getAllProductsFromCurrentArtisanOffline()
@@ -415,35 +430,36 @@ public class AppManager extends Application
 
     public void getAllEventsLocal()
     {
-            ParseQuery<Events> query = Events.getQuery();
-            query.fromLocalDatastore();
-            query.findInBackground(new FindCallback<Events>()
+        ParseQuery<Events> query = Events.getQuery();
+        query.fromLocalDatastore();
+        query.findInBackground(new FindCallback<Events>()
+        {
+            @Override
+            public void done(final List<Events> events, ParseException e)
             {
-                @Override
-                public void done(final List<Events> events, ParseException e)
+                if (e == null)
                 {
-                    if (e == null)
+                    eventList.clear();
+                    for (int i = 0; i < events.size(); i++)
                     {
-                        eventList.clear();
-                        for (int i = 0; i < events.size(); i++)
-                        {
 
-                            eventList.add(events.get(i));
-                        }
-                        delegate.processFinish("manager", AppConstants.RESULT_ARTISAN);
-                        getAllEvents();
+                        eventList.add(events.get(i));
                     }
-                    else
-                    {
-                        //getAllProductsFromCurrentArtisanOffline();
-                        getAllEvents();
-
-                    }
+                    delegate.processFinish("manager", AppConstants.RESULT_ARTISAN);
+                    getAllEvents();
                 }
-            });
+                else
+                {
+                    //getAllProductsFromCurrentArtisanOffline();
+                    getAllEvents();
+
+                }
+            }
+        });
     }
 
-    public void tagSearch(ArrayList<String> tags) {
+    public void tagSearch(ArrayList<String> tags)
+    {
         ParseQuery<Product> query = Product.getQuery();
         query.whereContainedIn("product_tags", tags);
 
@@ -452,7 +468,64 @@ public class AppManager extends Application
             @Override
             public void done(List<Product> objects, ParseException e)
             {
-                Log.d("Here", "Here");
+                searchProducts.clear();
+                searchProducts.addAll(objects);
+            }
+        });
+    }
+
+    public void getAllRequestOfCustomer()
+    {
+
+
+        ParseQuery<Request> query = Request.getQuery();
+        query.whereEqualTo("customer", ParseUser.getCurrentUser());
+        query.include("req_category");
+        query.findInBackground(new FindCallback<Request>()
+        {
+            @Override
+            public void done(List<Request> objects, ParseException e)
+            {
+                if (e == null)
+                {
+                    for(int i = 0; i < objects.size(); i++)
+                    {
+                        if (objects.get(i).getRequestStatus() == 0) {
+                            pendingList.add(objects.get(i));
+                        }
+                        else if (objects.get(i).getRequestStatus() == 1) {
+                            acceptedList.add(objects.get(i));
+                        }
+                        else {
+                            doneList.add(objects.get(i));
+                        }
+                    }
+                }
+                delegate.processFinish("manager", AppConstants.RESULT_REQUEST);
+
+            }
+        });
+    }
+
+
+
+    public void loginCustomer(String s, String password)
+    {
+        ParseUser.logInInBackground(s, password, new LogInCallback()
+        {
+            @Override
+            public void done(ParseUser parseUser, ParseException e)
+            {
+                if (e == null)
+                {
+                    getAllRequestOfCustomer();
+                    //getAllProductsFromCurrentArtisan();
+                }
+                else
+                {
+                    delegate.processFinish(LOG_TAG, AppConstants.RESULT_LOGIN_FAIL);
+                    //getAllProductsFromCurrentArtisanOffline();
+                }
             }
         });
     }

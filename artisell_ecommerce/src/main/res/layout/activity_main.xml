@@ -24,5 +24,20 @@
 
     <include layout="@layout/content_main" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="camera"
+            android:id = "@+id/cameraUpload"/>
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="gallery"
+            android:id = "@+id/galleryUpload"/>
+    </LinearLayout>
 </android.support.design.widget.CoordinatorLayout>

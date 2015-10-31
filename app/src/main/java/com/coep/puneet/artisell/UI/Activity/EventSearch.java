@@ -36,8 +36,7 @@ public class EventSearch extends BaseActivity
     @Override
     protected void setupToolbar()
     {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle(getString(R.string.title_activity_maps_activity_event));
     }
 
     @Override

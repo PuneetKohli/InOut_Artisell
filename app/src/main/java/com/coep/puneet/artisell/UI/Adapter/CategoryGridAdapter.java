@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.coep.puneet.artisell.ParseObjects.Category;
@@ -80,6 +81,26 @@ public class CategoryGridAdapter extends BaseAdapter
         if(categoryList.get(position).getCategory_name().toLowerCase().trim().startsWith("men"))
         {
             imageView.setImageDrawable(mContext.getResources().getDrawable(R.drawable.category_mens_clothing));
+        }
+        else if (categoryList.get(position).getCategory_name().toLowerCase().trim().startsWith("wom"))
+        {
+            imageView.setImageDrawable(mContext.getResources().getDrawable(R.drawable.category_womens_clothing));
+        }
+        else if (categoryList.get(position).getCategory_name().toLowerCase().trim().startsWith("bag"))
+        {
+            imageView.setImageDrawable(mContext.getResources().getDrawable(R.drawable.category_bags));
+        }
+        else if (categoryList.get(position).getCategory_name().toLowerCase().trim().startsWith("jew"))
+        {
+            imageView.setImageDrawable(mContext.getResources().getDrawable(R.drawable.category_womens_clothing));
+        }
+        else if (categoryList.get(position).getCategory_name().toLowerCase().trim().startsWith("foot"))
+        {
+            imageView.setImageDrawable(mContext.getResources().getDrawable(R.drawable.category_footwear));
+        }
+        else if (categoryList.get(position).getCategory_name().toLowerCase().trim().startsWith("clo"))
+        {
+            imageView.setImageDrawable(mContext.getResources().getDrawable(R.drawable.category_clocks));
         }
 
         return gridView;

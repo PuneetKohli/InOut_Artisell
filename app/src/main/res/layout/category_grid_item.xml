@@ -22,17 +22,16 @@
         <!-- the ImageView for the icon -->
         <ImageView
             android:id="@+id/iv_cat_icon"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="125dp"
+            android:layout_height="125dp"
             android:layout_centerHorizontal="true"
             android:layout_gravity="top|center"
-            android:layout_marginBottom="10dp"
             android:contentDescription="Description"
             android:focusable="false"
             android:focusableInTouchMode="false"
             android:padding="1dp"
             android:scaleType="fitXY"
-            android:src="@drawable/facebook"/>
+            android:src="@drawable/category_mens_clothing"/>
 
         <!--  the TextView for the title -->
         <TextView

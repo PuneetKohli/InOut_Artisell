@@ -132,7 +132,7 @@ public class AddProductWizardFragment extends WizardFragment
         }
         if (this.wizard.isLastStep())
         {
-            this.nextImage.setImageDrawable(getResources().getDrawable(R.drawable.notification_done));
+            this.nextImage.setImageDrawable(getResources().getDrawable(R.drawable.ic_check_circle_black_24dp));
         }
         else
         {

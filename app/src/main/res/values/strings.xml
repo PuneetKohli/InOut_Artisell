@@ -37,7 +37,7 @@
     <string name="title_activity_product_detailed">ProductDetailedActivity</string>
     <string name="title_activity_artisan_search">Search Artisans</string>
     <string name="change_language">Change Language</string>
-    <string name="title_activity_maps_activity_event">Map</string>
+    <string name="title_activity_maps_activity_event">Events Nearby</string>
     <string name="hint_category">Category</string>
     <string name="title_activity_maps">Map</string>
     <string name="alert_leave_add_product">New product will not be saved. Are you sure you want to exit?</string>

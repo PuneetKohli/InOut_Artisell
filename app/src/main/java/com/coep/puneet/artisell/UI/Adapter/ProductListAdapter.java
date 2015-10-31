@@ -69,7 +69,7 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
     {
         Product product = mData.get(position);
         holder.title.setText(product.getProduct_name());
-        holder.price.setText("" + product.getProductPrice());
+        holder.price.setText("Rs. " + product.getProductPrice());
 
         ParseFile image = product.getProductImage();
         String url = image.getUrl();

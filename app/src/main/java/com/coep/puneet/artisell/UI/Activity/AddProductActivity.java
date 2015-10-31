@@ -42,7 +42,7 @@ public class AddProductActivity extends BaseActivity
     protected void setupToolbar()
     {
         toolbar.setNavigationIcon(R.drawable.ic_close_white_24dp);
-
+        getSupportActionBar().setTitle(R.string.title_add_product_1);
     }
 
     @Override
@@ -105,4 +105,6 @@ public class AddProductActivity extends BaseActivity
         }
         super.onDestroy();
     }
+
+
 }

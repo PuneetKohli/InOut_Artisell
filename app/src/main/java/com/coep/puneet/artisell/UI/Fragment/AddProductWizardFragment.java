@@ -132,11 +132,11 @@ public class AddProductWizardFragment extends WizardFragment
         }
         if (this.wizard.isLastStep())
         {
-            this.nextImage.setVisibility(View.INVISIBLE);
+            this.nextImage.setImageDrawable(getResources().getDrawable(R.drawable.notification_done));
         }
         else
         {
-            this.nextImage.setVisibility(View.VISIBLE);
+            this.nextImage.setImageDrawable(getResources().getDrawable(R.drawable.finger_point_front));
         }
     }
 
@@ -334,7 +334,7 @@ public class AddProductWizardFragment extends WizardFragment
 
     public String getFinishButtonText()
     {
-        return TextUtils.isEmpty(this.mFinishButtonText) ? this.getResources().getString(org.codepond.wizardroid.R.string.action_finish) : this.mFinishButtonText;
+        return TextUtils.isEmpty(this.mFinishButtonText) ? this.getResources().getString(R.string.action_done) : this.mFinishButtonText;
     }
 
     public void setFinishButtonText(String finishButtonText)
@@ -351,4 +351,6 @@ public class AddProductWizardFragment extends WizardFragment
     {
         this.mBackButtonText = backButtonText;
     }
+
+
 }

@@ -31,6 +31,7 @@ public class AddProductStep1_category extends WizardStep
 {
 
     @Bind(R.id.category_grid_view) GridView categoryGridview;
+
     @OnClick(R.id.say) void speak() {
         tts = new TextToSpeech(getActivity(), new TextToSpeech.OnInitListener()
         {

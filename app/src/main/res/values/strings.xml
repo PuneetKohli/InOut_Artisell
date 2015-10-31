@@ -44,5 +44,6 @@
     <string name="alert_title_confirm">Confirm exit</string>
     <string name="alert_positive_button">Ok</string>
     <string name="alert_negative_button">Cancel</string>
+    <string name="title_activity_maps_activity_artisans">Map</string>
 
 </resources>

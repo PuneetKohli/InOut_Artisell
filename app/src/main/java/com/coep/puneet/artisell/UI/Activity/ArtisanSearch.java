@@ -2,13 +2,10 @@ package com.coep.puneet.artisell.UI.Activity;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 
-import com.coep.puneet.artisell.Custom.RecyclerItemClickListener;
 import com.coep.puneet.artisell.R;
 import com.coep.puneet.artisell.UI.Adapter.ArtisanListAdapter;
 
@@ -49,7 +46,8 @@ public class ArtisanSearch extends BaseActivity
             @Override
             public void onClick(View view)
             {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+
+                navigator.openNewActivity(ArtisanSearch.this, new MapsActivityArtisans());
             }
         });
 

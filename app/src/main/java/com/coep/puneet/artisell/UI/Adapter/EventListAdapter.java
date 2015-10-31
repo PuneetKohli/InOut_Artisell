@@ -37,8 +37,7 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.VHAr
         Events events = artisanList.get(position);
         holder.name.setText(events.getEventName());
         holder.location.setText(events.getEventLocation());
-        holder.startDate.setText(events.getStartDate().toLocaleString());
-        holder.endDate.setText(events.getEndDate().toLocaleString());
+        holder.startDate.setText(events.getStartDate().toLocaleString() + "-" + events.getEndDate().toLocaleString());
     }
 
     @Override
@@ -52,7 +51,6 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.VHAr
         public final TextView name;
         public final TextView location;
         public final TextView startDate;
-        public final TextView endDate;
 
         public VHArtisan(View view)
         {
@@ -60,7 +58,6 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.VHAr
             name = (TextView) view.findViewById(R.id.eventName);
             location = (TextView) view.findViewById(R.id.eventLocation);
             startDate = (TextView) view.findViewById(R.id.startDate);
-            endDate = (TextView) view.findViewById(R.id.endDate);
         }
     }
 }

@@ -1,18 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp">
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/tilerepeat"
+                android:orientation="vertical">
 
     <ScrollView
         android:id="@+id/scroll_view"
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/tilerepeat"
-        android:paddingTop="?android:attr/actionBarSize"
         >
 
         <LinearLayout
@@ -21,8 +18,15 @@
             android:layout_margin="8dp"
             android:orientation="vertical">
 
-            <include layout="@layout/card_product_details_1"/>
-            <include layout="@layout/card_product_details_3"/>
+            <include layout="@layout/card_product_detailed_new_image"/>
+
+            <include layout="@layout/card_product_detailed_new_1"/>
+
+            <include layout="@layout/card_product_detailed_new_2"/>
+
+            <include layout="@layout/card_product_detailed_new_4"/>
+
+            <include layout="@layout/card_product_detailed_new_3"/>
 
         </LinearLayout>
 

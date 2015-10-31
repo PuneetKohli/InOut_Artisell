@@ -44,6 +44,9 @@
     <string name="alert_title_confirm">Confirm exit</string>
     <string name="alert_positive_button">Ok</string>
     <string name="alert_negative_button">Cancel</string>
+    <string name="title_activity_home">Artisell</string>
+    <string name="subtitle_activity_home">Indian Culture Revisited</string>
+    <string name="hint_home_help">Tap on any option from the list below!</string>
     <string name="title_activity_maps_activity_artisans">Map</string>
 
 </resources>

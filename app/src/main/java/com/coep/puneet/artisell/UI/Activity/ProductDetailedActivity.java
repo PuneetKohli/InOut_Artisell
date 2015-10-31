@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.coep.puneet.artisell.R;
+import com.coep.puneet.artisell.UI.Fragment.AddProductWizardFragment;
 import com.parse.ParseFile;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
@@ -52,7 +53,7 @@ public class ProductDetailedActivity extends BaseActivity
     protected void setupLayout()
     {
         productPrice.setText("Rs. " + manager.currentProduct.getProductPrice() + "");
-        productQuantity.setText(""+manager.currentProduct.getProductQuantity());
+        productQuantity.setText("" + manager.currentProduct.getProductQuantity());
         ParseFile image = manager.currentProduct.getProductImage();
         String url = image.getUrl();
         Picasso.with(ProductDetailedActivity.this).load(url).placeholder(R.drawable.ab_background).into(productImage);
@@ -64,7 +65,9 @@ public class ProductDetailedActivity extends BaseActivity
         {
 
             for (int i = 0; i < tags.size() - 1; i++)
+            {
                 keypoints += tags.get(i) + ", \t";
+            }
 
             keypoints += tags.get(tags.size() - 1);
         }

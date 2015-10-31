@@ -336,4 +336,6 @@ public class AddProductWizardFragment extends WizardFragment
     {
         this.mBackButtonText = backButtonText;
     }
+
+
 }

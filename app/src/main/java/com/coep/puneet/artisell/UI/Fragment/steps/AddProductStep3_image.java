@@ -70,7 +70,9 @@ public class AddProductStep3_image extends WizardStep
         startActivityForResult(Intent.createChooser(intent, "Select File"), AppConstants.REQUEST_GALLERY);
     }
 
-    @OnClick(R.id.closeImage) void close() {
+    @OnClick(R.id.closeImage)
+    void close()
+    {
         imageView.setImageBitmap(null);
         byte[] data = {0};
         ParseFile a = new ParseFile("null", data);
@@ -83,13 +85,16 @@ public class AddProductStep3_image extends WizardStep
 
     TextToSpeech tts;
 
-    @OnClick(R.id.say) void speak() {
+    @OnClick(R.id.say)
+    void speak()
+    {
         tts = new TextToSpeech(getActivity(), new TextToSpeech.OnInitListener()
         {
             @Override
             public void onInit(int status)
             {
-                if (status == TextToSpeech.SUCCESS && tts != null) {
+                if (status == TextToSpeech.SUCCESS && tts != null)
+                {
 
                     say(getString(R.string.description_upload_image));
                     //
@@ -101,7 +106,9 @@ public class AddProductStep3_image extends WizardStep
             }
         });
     }
-    private void say(final String s) {
+
+    private void say(final String s)
+    {
         final HashMap<String, String> map = new HashMap<String, String>(1);
         map.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, AddProductActivity.class.getName());
         tts.speak(s, TextToSpeech.QUEUE_FLUSH, map);
@@ -126,12 +133,16 @@ public class AddProductStep3_image extends WizardStep
         return v;
     }
 
-    @Override public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent intent)
+    {
         super.onActivityResult(requestCode, resultCode, intent);
-        if (resultCode == getActivity().RESULT_OK) {
+        if (resultCode == getActivity().RESULT_OK)
+        {
             // The user picked an image. Send it to Clarifai for recognition.
             //Log.d("", "User picked image: " + intent.getData());
-            if (requestCode == AppConstants.REQUEST_CAMERA) {
+            if (requestCode == AppConstants.REQUEST_CAMERA)
+            {
                 bm = (Bitmap) intent.getExtras().get("data");
                 ByteArrayOutputStream bytes = new ByteArrayOutputStream();
                 assert bm != null;
@@ -146,16 +157,19 @@ public class AddProductStep3_image extends WizardStep
                     fo = new FileOutputStream(destination);
                     fo.write(bytes.toByteArray());
                     fo.close();
-                } catch (IOException e)
+                }
+                catch (IOException e)
                 {
                     e.printStackTrace();
                 }
             }
-            else if(requestCode == AppConstants.REQUEST_GALLERY) {
+            else if (requestCode == AppConstants.REQUEST_GALLERY)
+            {
                 bm = loadBitmapFromUri(intent.getData());
             }
 
-            if (bm != null) {
+            if (bm != null)
+            {
                 containerViewInitial.setVisibility(View.INVISIBLE);
                 containerViewPreview.setVisibility(View.VISIBLE);
 
@@ -165,59 +179,78 @@ public class AddProductStep3_image extends WizardStep
                 ((AddProductActivity) getActivity()).manager.currentBm = bm;
                 byte[] byteArray = stream.toByteArray();
 
-                final ParseFile image = new ParseFile("temp.jpg", byteArray);
-                image.saveInBackground(new SaveCallback()
+                if (byteArray != null)
+                {
+                    final ParseFile image = new ParseFile("temp.jpg", byteArray);
+
+                    image.saveInBackground(new SaveCallback()
+                    {
+                        @Override
+                        public void done(ParseException e)
+                        {
+                            ((AddProductActivity) getActivity()).manager.currentProduct.setProductImage(image);
+                        }
+                    });
+                }
+                // Run recognition on a background thread since it makes a network call.
+                new AsyncTask<Bitmap, Void, RecognitionResult>()
                 {
                     @Override
-                    public void done(ParseException e)
+                    protected RecognitionResult doInBackground(Bitmap... bitmaps)
                     {
-                        ((AddProductActivity) getActivity()).manager.currentProduct.setProductImage(image);
-                    }
-                });
-                // Run recognition on a background thread since it makes a network call.
-                new AsyncTask<Bitmap, Void, RecognitionResult>() {
-                    @Override protected RecognitionResult doInBackground(Bitmap... bitmaps) {
                         return recognizeBitmap(bitmaps[0]);
                     }
-                    @Override protected void onPostExecute(RecognitionResult result) {
+
+                    @Override
+                    protected void onPostExecute(RecognitionResult result)
+                    {
                         updateUIForResult(result);
                     }
                 }.execute(bm);
-            } else {
+            }
+            else
+            {
                 Toast.makeText(getActivity(), "Unable to load Image", Toast.LENGTH_SHORT).show();
             }
         }
     }
 
-    private Bitmap loadBitmapFromUri(Uri uri) {
-        try {
+    private Bitmap loadBitmapFromUri(Uri uri)
+    {
+        try
+        {
             // The image may be large. Load an image that is sized for display. This follows best
             // practices from http://developer.android.com/training/displaying-bitmaps/load-bitmap.html
             BitmapFactory.Options opts = new BitmapFactory.Options();
             opts.inJustDecodeBounds = true;
             BitmapFactory.decodeStream(getActivity().getContentResolver().openInputStream(uri), null, opts);
             int sampleSize = 1;
-            while (opts.outWidth / (2 * sampleSize) >= imageView.getWidth() &&
-                    opts.outHeight / (2 * sampleSize) >= imageView.getHeight()) {
+            while (opts.outWidth / (2 * sampleSize) >= imageView.getWidth() && opts.outHeight / (2 * sampleSize) >= imageView.getHeight())
+            {
                 sampleSize *= 2;
             }
 
             opts = new BitmapFactory.Options();
             opts.inSampleSize = sampleSize;
             return BitmapFactory.decodeStream(getActivity().getContentResolver().openInputStream(uri), null, opts);
-        } catch (IOException e) {
+        }
+        catch (IOException e)
+        {
             Log.e("lol", "Error loading image: " + uri, e);
         }
         return null;
     }
 
-    /** Sends the given bitmap to Clarifai for recognition and returns the result. */
-    private RecognitionResult recognizeBitmap(Bitmap bitmap) {
-        try {
+    /**
+     * Sends the given bitmap to Clarifai for recognition and returns the result.
+     */
+    private RecognitionResult recognizeBitmap(Bitmap bitmap)
+    {
+        try
+        {
             // Scale down the image. This step is optional. However, sending large images over the
             // network is slow and  does not significantly improve recognition performance.
-            Bitmap scaled = Bitmap.createScaledBitmap(bitmap, 320,
-                    320 * bitmap.getHeight() / bitmap.getWidth(), true);
+            Bitmap scaled = Bitmap.createScaledBitmap(bitmap, 320, 320 * bitmap.getHeight() / bitmap.getWidth(), true);
 
             // Compress the image as a JPEG.
             ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -226,24 +259,36 @@ public class AddProductStep3_image extends WizardStep
 
             // Send the JPEG to Clarifai and return the result.
             return client.recognize(new RecognitionRequest(jpeg)).get(0);
-        } catch (ClarifaiException e) {
+        }
+        catch (ClarifaiException e)
+        {
             Log.e("lol", "Clarifai error", e);
             return null;
         }
     }
 
-    /** Updates the UI by displaying tags for the given result. */
-    private void updateUIForResult(RecognitionResult result) {
-        if (result != null) {
-            if (result.getStatusCode() == RecognitionResult.StatusCode.OK) {
-                for (Tag tag : result.getTags()) {
+    /**
+     * Updates the UI by displaying tags for the given result.
+     */
+    private void updateUIForResult(RecognitionResult result)
+    {
+        if (result != null)
+        {
+            if (result.getStatusCode() == RecognitionResult.StatusCode.OK)
+            {
+                for (Tag tag : result.getTags())
+                {
                     ((AddProductActivity) getActivity()).manager.currentProduct.addProductTags(tag.getName());
                     Log.e("lol", tag.getName());
                 }
-            } else {
+            }
+            else
+            {
                 Log.e("lol", "Clarifai: " + result.getStatusMessage());
             }
-        } else {
+        }
+        else
+        {
             Log.e("lol", "Sorry, there was an error recognizing your image.: " + result.getStatusMessage());
         }
     }

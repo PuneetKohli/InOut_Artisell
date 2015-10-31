@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.coep.puneet.boilerplate.UI.Activity.AddProductActivity">
+    tools:context="com.coep.puneet.artisell.UI.Activity.AddProductActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -30,7 +30,7 @@
 
         <fragment
             android:id="@+id/form_wizard_fragment"
-            android:name="com.coep.puneet.boilerplate.UI.Fragment.AddProductWizardFragment"
+            android:name="com.coep.puneet.artisell.UI.Fragment.AddProductWizardFragment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </FrameLayout>

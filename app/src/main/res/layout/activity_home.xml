@@ -6,30 +6,50 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.coep.puneet.boilerplate.UI.Activity.HomeActivity">
+    tools:context="com.coep.puneet.artisell.UI.Activity.HomeActivity">
 
     <android.support.design.widget.AppBarLayout
-        android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:elevation="0dp"
+        android:layout_height="wrap_content">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay"/>
+            android:background="@color/white"
+            app:layout_scrollFlags="scroll"
+            android:elevation="0dp">
+            <TextView
+                android:id="@+id/nav_label"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textSize="20sp"
+                android:text="Label"
+                android:fontFamily="sans-serif-light"
+                android:layout_marginTop="8dp"/>
+            </android.support.v7.widget.Toolbar>
 
     </android.support.design.widget.AppBarLayout>
 
-        <GridView
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/scroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:background="@color/white">
+
+        <com.coep.puneet.artisell.Custom.ExpandableHeightGridView
             android:id="@+id/category_grid_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            android:numColumns="2">
-        </GridView>
+            android:numColumns="2"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        </com.coep.puneet.artisell.Custom.ExpandableHeightGridView>
+    </android.support.v4.widget.NestedScrollView>
 
 
 </android.support.design.widget.CoordinatorLayout>

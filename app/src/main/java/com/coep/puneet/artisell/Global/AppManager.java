@@ -3,11 +3,17 @@ package com.coep.puneet.artisell.Global;
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.preference.PreferenceManager;
+import android.util.DisplayMetrics;
 import android.util.Log;
 
 import com.coep.puneet.artisell.ParseObjects.Category;
+import com.coep.puneet.artisell.ParseObjects.Events;
 import com.coep.puneet.artisell.ParseObjects.Product;
 import com.parse.DeleteCallback;
 import com.parse.FindCallback;
@@ -21,6 +27,7 @@ import com.parse.ParseUser;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class AppManager extends Application
 {
@@ -29,12 +36,18 @@ public class AppManager extends Application
 
     public ArrayList<Category> productCategories = new ArrayList<>();
     public ArrayList<Product> currentArtisanProducts = new ArrayList<>();
+    public ArrayList<ParseUser> artisanList = new ArrayList<>();
     public Product currentProduct;
     public AsyncResponse delegate = null;
 
+    Locale myLocale;
+    static boolean localeChanged;
 
     ConnectivityManager cm;
     NetworkInfo ni;
+    public Bitmap currentBm;
+    public ParseUser currentArtisanSelected;
+    public ArrayList<Events> eventList = new ArrayList<>();
 
 
     @Override
@@ -45,18 +58,53 @@ public class AppManager extends Application
         ni = cm.getActiveNetworkInfo();
         parseInit();
         currentProduct = new Product();
+
+        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
+        String lang = settings.getString("language", "en");
+        setLocale(lang);
+    }
+
+    // * manually changing locale/
+    public void setLocale(String lang)
+    {
+        if (! "".equals(lang) && ! getBaseContext().getResources().getConfiguration().locale.getLanguage().equals(lang))
+        {
+            Log.d("Manager", "Setting locale to " + lang);
+            locale = new Locale(lang);
+            Resources res = getResources();
+            DisplayMetrics dm = res.getDisplayMetrics();
+            Configuration conf = res.getConfiguration();
+            conf.locale = myLocale;
+            res.updateConfiguration(conf, dm);
+            PreferenceManager.getDefaultSharedPreferences(this).edit().putString("language", lang);
+            onConfigurationChanged(conf);
+        }
+    }
+
+    private Locale locale = null;
+    @Override
+    public void onConfigurationChanged(Configuration newConfig)
+    {
+        super.onConfigurationChanged(newConfig);
+        Log.d("Manager", "Configuration changed");
+        if (locale != null)
+        {
+            newConfig.locale = locale;
+            Locale.setDefault(locale);
+            getBaseContext().getResources().updateConfiguration(newConfig, getBaseContext().getResources().getDisplayMetrics());
+        }
     }
 
     private void parseInit()
     {
+        ParseObject.registerSubclass(Events.class);
         ParseObject.registerSubclass(Category.class);
         ParseObject.registerSubclass(Product.class);
         Parse.enableLocalDatastore(this);
         Parse.initialize(this, "A2M7yTjp5iULp8xiFXymM29yX2U9bHEKhJdcsJEN", "L7WlExlZM9DoWNQkCCxY8uf7ummyn6cy1yrhnU7U");
     }
 
-    public void getAllCategory()
-    {
+    public void getAllCategory() {
 
         if ((ni != null) && (ni.isConnected()))
         {
@@ -67,14 +115,11 @@ public class AppManager extends Application
                 @Override
                 public void done(final List<Category> list, ParseException e)
                 {
-                    if (e == null)
+                    if(e == null)
                     {
-                        ParseObject.unpinAllInBackground("category_list", list, new DeleteCallback()
-                        {
-                            public void done(ParseException e)
-                            {
-                                if (e != null)
-                                {
+                        ParseObject.unpinAllInBackground("category_list", list, new DeleteCallback() {
+                            public void done(ParseException e) {
+                                if (e != null) {
                                     Log.d(LOG_TAG, e.getMessage());
                                     return;
                                 }
@@ -91,21 +136,18 @@ public class AppManager extends Application
                         delegate.processFinish(LOG_TAG, AppConstants.RESULT_CATEGORY_LIST);
 
                     }
-                    else
-                    {
+                    else {
                         Log.d(LOG_TAG, e.getMessage());
                     }
                 }
             });
         }
-        else
-        {
+        else {
             getAllCategoryLocal();
         }
     }
 
-    private void getAllCategoryLocal()
-    {
+    private void getAllCategoryLocal() {
         ParseQuery<Category> query = Category.getQuery();
         query.orderByAscending("category_name");
         query.fromPin("category_list");
@@ -131,8 +173,8 @@ public class AppManager extends Application
         });
     }
 
-    public void loginArtisan(String mobile)
-    {
+    public void loginArtisan(String mobile) {
+
         if ((ni != null) && (ni.isConnected()))
         {
             ParseUser.logInInBackground(mobile, "password", new LogInCallback()
@@ -191,12 +233,22 @@ public class AppManager extends Application
                                 }
 
                                 // Add the latest results for this query to the cache.
-                                ParseObject.pinAllInBackground("user_product_list", currentProducts);
+                                if (currentProducts != null)
+                                {
+                                    ParseObject.pinAllInBackground("user_product_list", currentProducts);
+                                }
                             }
                         });
-                        currentArtisanProducts.clear();
-                        currentArtisanProducts.addAll(currentProducts);
-                        Log.d("Manager", "Product list fetched with size " + currentArtisanProducts.size());
+                        if (currentProducts != null)
+                        {
+                            currentArtisanProducts.clear();
+                            currentArtisanProducts.addAll(currentProducts);
+                            Log.d("Manager", "Product list fetched with size " + currentArtisanProducts.size());
+                        }
+                        else
+                        {
+                            Log.d("Manager", "Product List empty from Parse");
+                        }
                         delegate.processFinish("manager", AppConstants.RESULT_PRODUCT_LIST);
                     }
                     else
@@ -211,6 +263,43 @@ public class AppManager extends Application
             //getAllProductsFromCurrentArtisanOffline();
         }
     }
+
+    public void getAllArtisans()
+    {
+        if ((ni != null) && (ni.isConnected()))
+        {
+            ParseQuery<ParseUser> query = ParseUser.getQuery();
+            query.include("user_products");
+            query.include("user_products.product_category");
+            query.whereEqualTo("is_artisan", true);
+
+            query.findInBackground(new FindCallback<ParseUser>()
+            {
+                @Override
+                public void done(final List<ParseUser> artisan, ParseException e)
+                {
+                    if (e == null)
+                    {
+                        for (int i = 0; i < artisan.size(); i++)
+                        {
+                            if (!artisan.get(i).getUsername().equals(ParseUser.getCurrentUser().getUsername()))
+                                artisanList.add(artisan.get(i));
+                        }
+                        delegate.processFinish("manager", AppConstants.RESULT_ARTISAN);
+                    }
+                    else
+                    {
+                        //getAllProductsFromCurrentArtisanOffline();
+                    }
+                }
+            });
+        }
+        else
+        {
+            //getAllProductsFromCurrentArtisanOffline();
+        }
+    }
+
 
     private void getAllProductsFromCurrentArtisanOffline()
     {
@@ -244,5 +333,38 @@ public class AppManager extends Application
                 }
             }
         });
+    }
+
+    public void getAllEvents()
+    {
+        if ((ni != null) && (ni.isConnected()))
+        {
+            ParseQuery<Events> query = Events.getQuery();
+
+            query.findInBackground(new FindCallback<Events>()
+            {
+                @Override
+                public void done(final List<Events> events, ParseException e)
+                {
+                    if (e == null)
+                    {
+                        for (int i = 0; i < events.size(); i++)
+                        {
+
+                            eventList.add(events.get(i));
+                        }
+                        delegate.processFinish("manager", AppConstants.RESULT_ARTISAN);
+                    }
+                    else
+                    {
+                        //getAllProductsFromCurrentArtisanOffline();
+                    }
+                }
+            });
+        }
+        else
+        {
+            //getAllProductsFromCurrentArtisanOffline();
+        }
     }
 }

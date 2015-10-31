@@ -31,6 +31,7 @@ public class LoginActivity extends BaseActivity
         mLoginButton.setText("");
         mProgressLogin.setVisibility(View.VISIBLE);
         manager.loginArtisan(mPhoneEditText.getText().toString());
+
     }
 
     @Override
@@ -88,6 +89,7 @@ public class LoginActivity extends BaseActivity
         });
 
         manager.getAllCategory();
+        manager.getAllEvents();
 
     }
 
@@ -99,8 +101,8 @@ public class LoginActivity extends BaseActivity
     void sendOtpSMS()
     {
         /*SmsManager smsManager = SmsManager.getDefault();
-        smsManager.sendTextMessage("+919819954448", null, "OTP is 5490", null, null);
-        SendUnicodeSms.sendSms("9819954448");*/
+        smsManager.sendTextMessage("+919819954448", null, "OTP is 5490", null, null);*/
+        //SendUnicodeSms.sendSms("9819954448");
     }
 
     void showOtpField()
@@ -119,6 +121,7 @@ public class LoginActivity extends BaseActivity
         {
             case AppConstants.RESULT_LOGIN_SUCCESS:
                 manager.getAllProductsFromCurrentArtisan();
+                manager.getAllArtisans();
                 openNextActivity();
                 break;
             case AppConstants.RESULT_LOGIN_FAIL:
@@ -130,7 +133,7 @@ public class LoginActivity extends BaseActivity
 
     void openNextActivity()
     {
-        //navigator.openNewActivity(LoginActivity.this, new HomeActivity());
+        navigator.openNewActivity(LoginActivity.this, new HomeActivity());
         mProgressLogin.setVisibility(View.INVISIBLE);
         mLoginButton.setText(getString(R.string.login));
     }

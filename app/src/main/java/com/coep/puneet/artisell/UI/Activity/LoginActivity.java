@@ -39,10 +39,8 @@ public class LoginActivity extends BaseActivity
     {
         super.onCreate(savedInstanceState);
         if(ParseUser.getCurrentUser() != null) {
-            manager.getAllProductsFromCurrentArtisan();
             manager.getAllProductsFromCurrentArtisanOffline();
             manager.getAllArtisansLocal();
-            manager.getAllArtisans();
             openNextActivity();
 
         }
@@ -96,9 +94,7 @@ public class LoginActivity extends BaseActivity
         });
 
         manager.getAllCategoryLocal();
-        manager.getAllCategory();
         manager.getAllEventsLocal();
-        manager.getAllEvents();
 
     }
 

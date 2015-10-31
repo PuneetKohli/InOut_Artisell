@@ -24,9 +24,7 @@ import com.clarifai.api.exception.ClarifaiException;
 import com.coep.puneet.artisell.Global.AppConstants;
 import com.coep.puneet.artisell.R;
 import com.coep.puneet.artisell.UI.Activity.AddProductActivity;
-import com.parse.ParseException;
 import com.parse.ParseFile;
-import com.parse.SaveCallback;
 
 import org.codepond.wizardroid.WizardStep;
 
@@ -166,14 +164,8 @@ public class AddProductStep3_image extends WizardStep
                 byte[] byteArray = stream.toByteArray();
 
                 final ParseFile image = new ParseFile("temp.jpg", byteArray);
-                image.saveInBackground(new SaveCallback()
-                {
-                    @Override
-                    public void done(ParseException e)
-                    {
-                        ((AddProductActivity) getActivity()).manager.currentProduct.setProductImage(image);
-                    }
-                });
+                ((AddProductActivity) getActivity()).manager.currentProduct.setProductImage(image);
+                image.saveInBackground();
                 // Run recognition on a background thread since it makes a network call.
                 new AsyncTask<Bitmap, Void, RecognitionResult>() {
                     @Override protected RecognitionResult doInBackground(Bitmap... bitmaps) {
@@ -244,7 +236,7 @@ public class AddProductStep3_image extends WizardStep
                 Log.e("lol", "Clarifai: " + result.getStatusMessage());
             }
         } else {
-            Log.e("lol", "Sorry, there was an error recognizing your image.: " + result.getStatusMessage());
+            //Log.e("lol", "Sorry, there was an error recognizing your image.: " + result.getStatusMessage());
         }
     }
 }

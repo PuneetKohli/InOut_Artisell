@@ -165,9 +165,11 @@ public class AppManager extends Application
                         productCategories.add(list.get(i));
                     }
                     delegate.processFinish(LOG_TAG, AppConstants.RESULT_CATEGORY_LIST);
+                    getAllCategory();
                 }
                 else
                 {
+                    getAllCategory();
                     delegate.processFinish(LOG_TAG, AppConstants.RESULT_CATEGORY_LIST_ERROR);
                 }
             }
@@ -327,9 +329,11 @@ public class AppManager extends Application
 
                         }
                         delegate.processFinish("manager", AppConstants.RESULT_ARTISAN);
+                        getAllArtisans();
                     }
                     else
                     {
+                        getAllArtisans();
                         //getAllProductsFromCurrentArtisanOffline();
                     }
                 }
@@ -361,10 +365,13 @@ public class AppManager extends Application
                     currentArtisanProducts.clear();
                     currentArtisanProducts.addAll(currentProducts);
                     delegate.processFinish("manager", AppConstants.RESULT_PRODUCT_LIST);
+                    getAllProductsFromCurrentArtisan();
                 }
                 else
                 {
                     delegate.processFinish(LOG_TAG, AppConstants.RESULT_PRODUCT_LIST_ERROR);
+                    getAllProductsFromCurrentArtisan();
+
                 }
             }
         });
@@ -424,10 +431,13 @@ public class AppManager extends Application
                             eventList.add(events.get(i));
                         }
                         delegate.processFinish("manager", AppConstants.RESULT_ARTISAN);
+                        getAllEvents();
                     }
                     else
                     {
                         //getAllProductsFromCurrentArtisanOffline();
+                        getAllEvents();
+
                     }
                 }
             });

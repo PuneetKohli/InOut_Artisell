@@ -294,16 +294,31 @@ public class AddProductWizardFragment extends WizardFragment
         super.onWizardComplete();   //Make sure to first call the super method before anything else
         final Product product = ((AddProductActivity) getActivity()).manager.currentProduct;
 
-        product.saveEventually(new SaveCallback()
+        ((AddProductActivity) getActivity()).manager.currentArtisanProducts.add(product);
+
+        product.getProductImage().saveInBackground(new SaveCallback()
         {
             @Override
             public void done(ParseException e)
             {
-                ((AddProductActivity) getActivity()).manager.currentArtisanProducts.add(product);
-                ParseUser.getCurrentUser().addUnique("user_products", product);
-                ParseUser.getCurrentUser().saveEventually();
+                if(e == null)
+                {
+                    product.saveEventually(new SaveCallback()
+                    {
+                        @Override
+                        public void done(ParseException e)
+                        {
+                            ParseUser.getCurrentUser().addUnique("user_products", product);
+                            ParseUser.getCurrentUser().saveEventually();
+                        }
+                    });
+                }
+                else {
+                    //Toast.makeText(getActivity(), "Unable to save product to server in offline mode, you can view it offline for the time being", Toast.LENGTH_SHORT).show();
+                }
             }
         });
+
         getActivity().finish();
     }
 

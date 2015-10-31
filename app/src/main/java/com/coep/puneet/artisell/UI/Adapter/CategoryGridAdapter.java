@@ -69,6 +69,10 @@ public class CategoryGridAdapter extends BaseAdapter
 
             TextView textView = (TextView) gridView.findViewById(R.id.tv_cat_name);
 
+            if(categoryList.get(position).getCategory_name().toLowerCase().trim().startsWith("men"))
+            {
+                imageView.setImageDrawable(mContext.getResources().getDrawable(R.drawable.category_mens_clothing));
+            }
             //imageView.setImageResource(mNavIds[position]);
             //imageView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, height / 4));
 

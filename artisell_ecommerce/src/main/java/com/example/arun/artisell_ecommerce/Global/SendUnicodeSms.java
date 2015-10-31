@@ -1,5 +1,5 @@
 package com.example.arun.artisell_ecommerce.Global;
-
+//
 import android.os.AsyncTask;
 
 import org.apache.commons.codec.binary.Base64;

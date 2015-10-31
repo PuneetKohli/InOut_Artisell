@@ -128,6 +128,7 @@ public class AppManager extends Application
                                 ParseObject.pinAllInBackground("category_list", list);
                             }
                         });
+                        productCategories.clear();
                         for (int i = 0; i < list.size(); i++)
                         {
                             productCategories.add(list.get(i));
@@ -147,7 +148,7 @@ public class AppManager extends Application
         }
     }
 
-    private void getAllCategoryLocal() {
+    public void getAllCategoryLocal() {
         ParseQuery<Category> query = Category.getQuery();
         query.orderByAscending("category_name");
         query.fromPin("category_list");
@@ -280,8 +281,10 @@ public class AppManager extends Application
                 {
                     if (e == null)
                     {
+                        artisanList.clear();
                         for (int i = 0; i < artisan.size(); i++)
                         {
+                            ParseObject.pinAllInBackground("artisan_list", artisan);
                             if (!artisan.get(i).getUsername().equals(ParseUser.getCurrentUser().getUsername()))
                                 artisanList.add(artisan.get(i));
                         }
@@ -300,8 +303,40 @@ public class AppManager extends Application
         }
     }
 
+    public void getAllArtisansLocal()
+    {
+            ParseQuery<ParseUser> query = ParseUser.getQuery();
+            query.include("user_products");
+            query.include("user_products.product_category");
+            query.whereEqualTo("is_artisan", true);
+            query.fromLocalDatastore();
 
-    private void getAllProductsFromCurrentArtisanOffline()
+            query.findInBackground(new FindCallback<ParseUser>()
+            {
+                @Override
+                public void done(final List<ParseUser> artisan, ParseException e)
+                {
+                    if (e == null)
+                    {
+                        artisanList.clear();
+
+                        for (int i = 0; i < artisan.size(); i++)
+                        {
+                            if (!artisan.get(i).getUsername().equals(ParseUser.getCurrentUser().getUsername()))
+                                artisanList.add(artisan.get(i));
+
+                        }
+                        delegate.processFinish("manager", AppConstants.RESULT_ARTISAN);
+                    }
+                    else
+                    {
+                        //getAllProductsFromCurrentArtisanOffline();
+                    }
+                }
+            });
+    }
+
+    public void getAllProductsFromCurrentArtisanOffline()
     {
         SharedPreferences prefs = getSharedPreferences("Parse", MODE_PRIVATE);
         String restoredText = prefs.getString("objectId", null);
@@ -315,7 +350,7 @@ public class AppManager extends Application
         query.include("user_products");
         query.include("user_products.product_category");
         query.fromLocalDatastore();
-        query.getInBackground(objectId, new GetCallback<ParseUser>()
+        query.getInBackground(ParseUser.getCurrentUser().getObjectId(), new GetCallback<ParseUser>()
         {
             @Override
             public void done(final ParseUser artisan, ParseException e)
@@ -348,6 +383,9 @@ public class AppManager extends Application
                 {
                     if (e == null)
                     {
+                        ParseObject.pinAllInBackground("event_list", events);
+
+                        eventList.clear();
                         for (int i = 0; i < events.size(); i++)
                         {
 
@@ -366,5 +404,32 @@ public class AppManager extends Application
         {
             //getAllProductsFromCurrentArtisanOffline();
         }
+    }
+
+    public void getAllEventsLocal()
+    {
+            ParseQuery<Events> query = Events.getQuery();
+            query.fromLocalDatastore();
+            query.findInBackground(new FindCallback<Events>()
+            {
+                @Override
+                public void done(final List<Events> events, ParseException e)
+                {
+                    if (e == null)
+                    {
+                        eventList.clear();
+                        for (int i = 0; i < events.size(); i++)
+                        {
+
+                            eventList.add(events.get(i));
+                        }
+                        delegate.processFinish("manager", AppConstants.RESULT_ARTISAN);
+                    }
+                    else
+                    {
+                        //getAllProductsFromCurrentArtisanOffline();
+                    }
+                }
+            });
     }
 }

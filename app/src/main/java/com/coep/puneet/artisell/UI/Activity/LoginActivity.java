@@ -11,8 +11,8 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.coep.puneet.artisell.Global.AppConstants;
-import com.coep.puneet.artisell.Global.SendUnicodeSms;
 import com.coep.puneet.artisell.R;
+import com.parse.ParseUser;
 
 import butterknife.Bind;
 import butterknife.OnClick;
@@ -38,7 +38,14 @@ public class LoginActivity extends BaseActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        if(ParseUser.getCurrentUser() != null) {
+            manager.getAllProductsFromCurrentArtisan();
+            manager.getAllProductsFromCurrentArtisanOffline();
+            manager.getAllArtisansLocal();
+            manager.getAllArtisans();
+            openNextActivity();
 
+        }
     }
 
 
@@ -88,7 +95,9 @@ public class LoginActivity extends BaseActivity
             }
         });
 
+        manager.getAllCategoryLocal();
         manager.getAllCategory();
+        manager.getAllEventsLocal();
         manager.getAllEvents();
 
     }

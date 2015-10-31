@@ -91,6 +91,10 @@
             android:name=".UI.Activity.MapsActivityArtisans"
             android:label="@string/title_activity_maps_activity_artisans">
         </activity>
+        <activity
+            android:name=".UI.Activity.JobActivity"
+            android:label="@string/title_activity_jobs_activity">
+        </activity>
     </application>
 
 </manifest>

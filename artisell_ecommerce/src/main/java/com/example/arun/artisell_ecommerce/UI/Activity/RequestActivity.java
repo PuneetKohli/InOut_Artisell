@@ -2,6 +2,7 @@ package com.example.arun.artisell_ecommerce.UI.Activity;
 
 
 import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -17,11 +18,15 @@ import android.widget.ProgressBar;
 import com.example.arun.artisell_ecommerce.Custom.DividerItemDecoration;
 import com.example.arun.artisell_ecommerce.Custom.SlidingTabLayout;
 import com.example.arun.artisell_ecommerce.Global.AppConstants;
+import com.example.arun.artisell_ecommerce.Global.Utils;
 import com.example.arun.artisell_ecommerce.ParseObjects.Request;
 import com.example.arun.artisell_ecommerce.R;
 import com.example.arun.artisell_ecommerce.UI.Adapter.RequestAdapter;
+import com.github.sendgrid.SendGrid;
 
 import java.util.ArrayList;
+import java.util.Hashtable;
+import java.util.concurrent.ExecutionException;
 
 public class RequestActivity extends BaseActivity
 {
@@ -74,9 +79,56 @@ public class RequestActivity extends BaseActivity
             public void onClick(View view)
             {
                 Snackbar.make(view, "Add Request", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                //sendMessage("punkohl@gmail.com", 0);
+                //sendMessage("arunswaminathan94@gmail.com", 1);
+                //SendUnicodeSms.sendSms("7507118432", "You have received a new order. Please check the app");
             }
         });
         // manager.getAllRequestOfCustomer();
+    }
+
+    private class SendEmailWithSendGrid extends AsyncTask<Hashtable<String,String>, Void, String>
+    {
+
+        @Override
+        protected String doInBackground(Hashtable<String,String>... params) {
+            Hashtable<String,String> h = params[0];
+            Utils creds = new Utils();
+            SendGrid sendgrid = new SendGrid(creds.getUsername(),creds.getPassword());
+            sendgrid.addTo(h.get("to"));
+            sendgrid.setFrom(h.get("from"));
+            sendgrid.setSubject(h.get("subject"));
+            sendgrid.setText(h.get("text"));
+            String response = sendgrid.send();
+            return response;
+        }
+    }
+
+    // Called when the user clicks the Send button
+    @SuppressWarnings("unchecked")
+    public void sendMessage(String source, int flag) {
+        Hashtable<String,String> params = new Hashtable<String,String>();
+        String result = null;
+
+        params.put("to", source);
+        params.put("from", "noreply@artisell.com");
+        params.put("subject", "Artisell Transaction Status");
+        if(flag == 0)
+        {
+            params.put("text", "Congratulation on purchasing this product. It shall delivered to you soon");
+        }
+        else {
+            params.put("text", "You have a received a new order, Please visit the app to check its status");
+        }
+        // Send the Email
+        SendEmailWithSendGrid email = new SendEmailWithSendGrid();
+        try {
+            result = email.execute(params).get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

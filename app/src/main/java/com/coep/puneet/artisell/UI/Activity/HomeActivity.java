@@ -7,10 +7,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.GridView;
 import android.widget.Toast;
 
 import com.cocosw.bottomsheet.BottomSheet;
@@ -84,6 +82,9 @@ public class HomeActivity extends BaseActivity
                         break;
                     case 5:
                         navigator.openNewActivity(HomeActivity.this, new EventSearch());
+                        break;
+                    case 6:
+                        navigator.openNewActivity(HomeActivity.this, new JobActivity());
                         break;
                 }
             }

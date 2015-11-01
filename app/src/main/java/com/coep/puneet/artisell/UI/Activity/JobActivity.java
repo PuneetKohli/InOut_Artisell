@@ -33,7 +33,7 @@ public class JobActivity extends BaseActivity
     protected void setupToolbar()
     {
         getSupportActionBar().setTitle(getString(R.string.title_activity_jobs_activity));
-
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override

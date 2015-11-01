@@ -103,8 +103,7 @@ public class RequestDetailed extends BaseActivity
                     request.saveEventually();
                     Toast.makeText(RequestDetailed.this, "Your Request has been accepted", Toast.LENGTH_SHORT).show();
                     manager.pendingList.add(request);
-                    finish();
-                    finish();
+                    navigator.openNewActivity(RequestDetailed.this, new MainActivity());
                 }
             });
         }
@@ -113,8 +112,7 @@ public class RequestDetailed extends BaseActivity
             request.saveEventually();
             Toast.makeText(RequestDetailed.this, "Your Request has been accepted", Toast.LENGTH_SHORT).show();
             manager.pendingList.add(request);
-            finish();
-            finish();
+            navigator.openNewActivity(RequestDetailed.this, new MainActivity());
         }
 
         //request.setRequestDeliverBy(new Date());

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="com.coep.puneet.artisell_ecommerce"
-          xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest
+    package="com.coep.puneet.artisell_ecommerce"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
@@ -40,7 +41,11 @@
             android:name=".UI.Activity.ProductDetailedActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme">
-
+        </activity>
+        <activity
+            android:name=".UI.Activity.ProductListActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme">
         </activity>
     </application>
 

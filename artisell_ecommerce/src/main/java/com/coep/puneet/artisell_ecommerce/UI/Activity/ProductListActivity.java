@@ -25,7 +25,6 @@ public class ProductListActivity extends BaseActivity
     @Bind(R.id.productsListRecycler) RecyclerView mRecyclerView;
     @Bind(R.id.empty_result_text) TextView mEmptyText;
     @Bind(R.id.progress_loading) ProgressBar mProgressBar;
-    @Bind(R.id.swipeRefreshLayout) SwipeRefreshLayout mSwipeRefreshLayout;
 
     ProductListAdapter mAdapter;
     GridLayoutManager mLayoutManager;
@@ -57,7 +56,7 @@ public class ProductListActivity extends BaseActivity
         manager.delegate = this;
 
         mLayoutManager = new GridLayoutManager(this, 2);
-        mAdapter = new ProductListAdapter(this, manager.currentArtisanProducts);
+        mAdapter = new ProductListAdapter(this, manager.searchProducts);
 
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.addItemDecoration(new MarginDecoration(this));
@@ -69,22 +68,12 @@ public class ProductListActivity extends BaseActivity
             @Override
             public void onItemClick(View view, int position)
             {
-                manager.currentProduct = manager.currentArtisanProducts.get(position);
+                manager.currentProduct = manager.searchProducts.get(position);
                 navigator.openNewActivity(ProductListActivity.this, new ProductDetailedActivity());
             }
         }));
 
         mProgressBar.setVisibility(View.VISIBLE);
-
-        mSwipeRefreshLayout.setColorSchemeResources(R.color.app_primary, R.color.signal_green);
-        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener()
-        {
-            @Override
-            public void onRefresh()
-            {
-                manager.getAllProductsFromCurrentArtisan();
-            }
-        });
 
         setViewStateBasedOnFetchedList();
 
@@ -92,8 +81,7 @@ public class ProductListActivity extends BaseActivity
 
     void setViewStateBasedOnFetchedList()
     {
-        mSwipeRefreshLayout.setRefreshing(false);
-        if(manager.currentArtisanProducts.size() != 0)
+        if(manager.searchProducts.size() != 0)
         {
             mProgressBar.setVisibility(View.INVISIBLE);
             mEmptyText.setVisibility(View.INVISIBLE);
@@ -104,8 +92,6 @@ public class ProductListActivity extends BaseActivity
             {
                 mProgressBar.setVisibility(View.VISIBLE);
                 mEmptyText.setVisibility(View.INVISIBLE);
-                manager.getAllProductsFromCurrentArtisan();
-                initialLoad = false;
             }
             else
             {
@@ -120,13 +106,14 @@ public class ProductListActivity extends BaseActivity
     {
         switch (type)
         {
-            case AppConstants.RESULT_PRODUCT_LIST:
-                Log.d("ViewProduct", "Got product list with size " + manager.currentArtisanProducts.size());
-                if (manager.currentArtisanProducts.size() != 0)
+            case AppConstants.RESULT_SEARCH_LIST:
+                initialLoad = false;
+                Log.d("ViewProduct", "Got product list with size " + manager.searchProducts.size());
+                if (manager.searchProducts.size() != 0)
                 {
                     setViewStateBasedOnFetchedList();
                     //Doing using clear and then add creating wierd unsolvable issues
-                    mAdapter = new ProductListAdapter(ProductListActivity.this, manager.currentArtisanProducts);
+                    mAdapter = new ProductListAdapter(ProductListActivity.this, manager.searchProducts);
                     mRecyclerView.setAdapter(mAdapter);
                 }
                 else {
@@ -143,14 +130,14 @@ public class ProductListActivity extends BaseActivity
 
     void showNoInternetSnackbar()
     {
-        Snackbar.make(mRecyclerView, "No Internet Connection", Snackbar.LENGTH_LONG).setAction("RETRY", new View.OnClickListener()
+        /*Snackbar.make(mRecyclerView, "No Internet Connection", Snackbar.LENGTH_LONG).setAction("RETRY", new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
                 manager.getAllProductsFromCurrentArtisan();
             }
-        }).setActionTextColor(Color.GREEN).show();
+        }).setActionTextColor(Color.GREEN).show();*/
     }
 
 }

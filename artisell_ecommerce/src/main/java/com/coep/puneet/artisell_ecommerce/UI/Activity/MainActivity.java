@@ -10,11 +10,14 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.clarifai.api.ClarifaiClient;
@@ -38,14 +41,10 @@ import java.util.ArrayList;
 import butterknife.Bind;
 import butterknife.OnClick;
 
-public class MainActivity extends BaseActivity
+public class MainActivity extends BaseActivity implements TextView.OnEditorActionListener
 {
     @Bind(R.id.newProductsRecycler) RecyclerView mRecyclerView;
     @Bind(R.id.category_grid_view) ExpandableHeightGridView navGrid;
-    @OnClick(R.id.cameraImage) void searchImage() {
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        startActivityForResult(intent, AppConstants.REQUEST_CAMERA);
-    }
 
     Bitmap bm;
     private final ClarifaiClient client = new ClarifaiClient(APP_ID, APP_SECRET);
@@ -58,6 +57,14 @@ public class MainActivity extends BaseActivity
     void imageSearch()
     {
         Log.d("Test", "Test");
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(intent, AppConstants.REQUEST_CAMERA);
+    }
+
+    @OnClick(R.id.button_text_search)
+    void textSearch()
+    {
+        Log.d("Test", "Test clicked search button");
         //Do image search!
     }
 
@@ -127,27 +134,9 @@ public class MainActivity extends BaseActivity
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id)
             {
-                /*switch (position)
-                {
-                    case 0:
-                        navigator.openNewActivity(MainActivity.this, new ViewProductActivity());
-                        break;
-                    case 1:
-                        navigator.openNewActivity(MainActivity.this, new AddProductActivity());
-                        break;
-                    case 2:
-                        setLanguage();
-                        break;
-                    case 3:
-                        navigator.openNewActivity(MainActivity.this, new ProfileActivity());
-                        break;
-                    case 4:
-                        navigator.openNewActivity(MainActivity.this, new ArtisanSearch());
-                        break;
-                    case 5:
-                        navigator.openNewActivity(MainActivity.this, new EventSearch());
-                        break;
-                }*/
+                manager.searchProducts.clear();
+                manager.getAllProductsOfCategory(manager.productCategories.get(position));
+                navigator.openNewActivity(MainActivity.this, new ProductListActivity());
             }
         });
     }
@@ -191,6 +180,23 @@ public class MainActivity extends BaseActivity
                 }
                 break;
         }
+    }
+
+
+    @Override
+    public boolean onEditorAction(TextView v, int actionId, KeyEvent event)
+    {
+        if (event != null)
+        {
+            // if shift key is down, then we want to insert the '\n' char in the TextView;
+            // otherwise, the default action is to send the message.
+            if (!event.isShiftPressed())
+            {
+                Log.d("Yolo", "Yolo");
+            }
+            return true;
+        }
+        return false;
     }
 
     @Override public void onActivityResult(int requestCode, int resultCode, Intent intent) {
@@ -268,6 +274,7 @@ public class MainActivity extends BaseActivity
                     tags.add(tag.getName());
                 }
                 manager.tagSearch(tags);
+                navigator.openNewActivity(MainActivity.this, new ProductListActivity());
 
             } else {
                 Log.e("lol", "Clarifai: " + result.getStatusMessage());

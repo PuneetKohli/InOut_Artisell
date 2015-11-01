@@ -18,7 +18,7 @@
     <string name="title_add_product_4">4. Add Price and Quantity</string>
     <string name="artisan">Artisans</string>
     <string name="login">Log in</string>
-    <string name="no_product_empty_text">You have not uploaded any products yet!</string>
+    <string name="no_product_empty_text">No products available!</string>
 
     <string name="description_select_category">Please select which type of product you are going to sell by tapping any one image from below list!</string>
     <string name="description_upload_image">Please upload a photo of your product either from camera or from image gallery!</string>

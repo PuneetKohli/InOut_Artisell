@@ -36,7 +36,7 @@ public class AppManager extends Application
     private String LOG_TAG = AppManager.class.getCanonicalName();
 
     public ArrayList<Category> productCategories = new ArrayList<>();
-    public ArrayList<Product> currentArtisanProducts = new ArrayList<>();
+    //public ArrayList<Product> currentArtisanProducts = new ArrayList<>();
     public ArrayList<ParseUser> artisanList = new ArrayList<>();
     public ArrayList<Request> acceptedList = new ArrayList<>();
     public ArrayList<Request> pendingList = new ArrayList<>();
@@ -225,7 +225,7 @@ public class AppManager extends Application
         }
     }
 
-    public void getAllProductsFromCurrentArtisan()
+/*    public void getAllProductsFromCurrentArtisan()
     {
         if ((ni != null) && (ni.isConnected()))
         {
@@ -281,7 +281,7 @@ public class AppManager extends Application
         {
             //getAllProductsFromCurrentArtisanOffline();
         }
-    }
+    }*/
 
     public void getAllArtisans()
     {
@@ -356,7 +356,7 @@ public class AppManager extends Application
         });
     }
 
-    public void getAllProductsFromCurrentArtisanOffline()
+/*    public void getAllProductsFromCurrentArtisanOffline()
     {
         SharedPreferences prefs = getSharedPreferences("Parse", MODE_PRIVATE);
         String restoredText = prefs.getString("objectId", null);
@@ -391,7 +391,7 @@ public class AppManager extends Application
                 }
             }
         });
-    }
+    }*/
 
     public void getAllEvents()
     {

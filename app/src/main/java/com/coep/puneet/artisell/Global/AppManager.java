@@ -459,6 +459,7 @@ public class AppManager extends Application
     {
         ParseQuery<Request> query = Request.getQuery();
         query.include("req_category");
+        query.whereEqualTo("status", 0);
         query.findInBackground(new FindCallback<Request>()
         {
             @Override
@@ -480,6 +481,7 @@ public class AppManager extends Application
         ParseQuery<Request> query = Request.getQuery();
         query.fromLocalDatastore();
         query.include("req_category");
+        query.whereEqualTo("status", 0);
         query.findInBackground(new FindCallback<Request>()
         {
             @Override

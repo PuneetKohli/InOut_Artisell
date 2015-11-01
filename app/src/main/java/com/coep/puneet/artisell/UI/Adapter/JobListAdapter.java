@@ -7,10 +7,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.coep.puneet.artisell.ParseObjects.Request;
 import com.coep.puneet.artisell.R;
+import com.coep.puneet.artisell.UI.Activity.JobActivity;
 
 import java.util.ArrayList;
 
@@ -103,9 +105,17 @@ public class JobListAdapter extends RecyclerView.Adapter<JobListAdapter.VHArtisa
             {
                 /*jobsList.remove(position);
                 notifyItemRemoved(position);*/
+                //SendUnicodeSms.sendSms("7507118432", "Your request has been accepted. Please check the app for the status");
+                ((JobActivity) mContext).manager.jobsList.get(position).setRequestStatus(1);
+                ((JobActivity) mContext).manager.jobsList.get(position).saveEventually();
+                jobsList.remove(position);
+                notifyItemRemoved(position);
+                Toast.makeText(mContext, "You have succesfully accepted the job", Toast.LENGTH_SHORT).show();
             }
         });
     }
+
+    
 
     @Override
     public int getItemCount()

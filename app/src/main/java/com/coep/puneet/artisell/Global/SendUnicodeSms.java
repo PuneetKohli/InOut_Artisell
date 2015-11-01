@@ -1,9 +1,8 @@
 package com.coep.puneet.artisell.Global;
-
+//
 import android.os.AsyncTask;
 
-import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
+import org.apache.commons.codec.binary.Base64;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -13,11 +12,14 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
-import org.apache.commons.codec.binary.Base64;
 
-public class SendUnicodeSms {
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 
-    public static void sendSms(final String n)
+public class SendUnicodeSms
+{
+
+    public static void sendSms(final String n, final String m)
     {
         AsyncTask.execute(new Runnable()
         {
@@ -26,7 +28,7 @@ public class SendUnicodeSms {
             {
                 try
                 {
-                    send(n);
+                    send(n, m);
                 }
                 catch (NoSuchFieldException e)
                 {
@@ -44,7 +46,7 @@ public class SendUnicodeSms {
         });
     }
 
-    static void send(String number) throws NoSuchFieldException,
+    static void send(String number, String smsBody) throws NoSuchFieldException,
             SecurityException,
             IllegalArgumentException,
             IllegalAccessException,
@@ -53,7 +55,7 @@ public class SendUnicodeSms {
         ArrayList<NameValuePair> postParameters = new ArrayList<NameValuePair>();
         postParameters.add(new BasicNameValuePair("From", "09243422233"));
         postParameters.add(new BasicNameValuePair("To", number));
-        String body = "Dear, Your OTP is 59428 to log into Artisell App";
+        String body = smsBody;
         String out = new String(body.getBytes("UTF-8"), "ISO-8859-1");
         postParameters.add(new BasicNameValuePair("Body", out));
 

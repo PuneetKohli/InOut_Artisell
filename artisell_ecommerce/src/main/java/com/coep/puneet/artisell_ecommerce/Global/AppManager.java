@@ -548,4 +548,22 @@ public class AppManager extends Application
             }
         });
     }
+
+    public void getAllProductsOfCategory(Category category)
+    {
+        ParseQuery<Product> query = Product.getQuery();
+        query.include("product_category");
+        query.whereEqualTo("product_category", category);
+        query.findInBackground(new FindCallback<Product>()
+        {
+            @Override
+            public void done(List<Product> objects, ParseException e)
+            {
+                searchProducts.clear();
+                searchProducts.addAll(objects);
+                delegate.processFinish(LOG_TAG, AppConstants.RESULT_SEARCH_LIST);
+
+            }
+        });
+    }
 }

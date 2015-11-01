@@ -96,7 +96,8 @@ public class MainActivity extends BaseActivity implements TextView.OnEditorActio
     @Override
     protected void setupToolbar()
     {
-
+        toolbar.setNavigationIcon(R.drawable.ic_action_logo_white);
+        getSupportActionBar().setTitle("");
     }
 
     @Override

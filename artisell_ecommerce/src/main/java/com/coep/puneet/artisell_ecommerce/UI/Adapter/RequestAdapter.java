@@ -16,6 +16,8 @@ import com.parse.ParseFile;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 /**
  * Created by Arun on 01-Nov-15.
  */
@@ -70,36 +72,37 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.VHCatego
     {
         holder.description.setText(mData.get(position).getRequestDescription());
         holder.budget.setText("Rs " + mData.get(position).getRequestBudget());
+        holder.deliveredBy.setText("" + mData.get(position).getRequestDeliverBy().toString());
         if(mData.get(position).getRequestPhoto() == null) {
 
             if(mData.get(position).getRequestCategory().getCategory_name().toLowerCase().trim().startsWith("men"))
             {
-                holder.image.setImageDrawable(mContext.getResources().getDrawable(R.drawable.category_mens_clothing));
+                holder.imageView.setImageDrawable(mContext.getResources().getDrawable(R.drawable.category_mens_clothing));
             }
             else if (mData.get(position).getRequestCategory().getCategory_name().toLowerCase().trim().startsWith("wom"))
             {
-                holder.image.setImageDrawable(mContext.getResources().getDrawable(R.drawable.category_womens_clothing));
+                holder.imageView.setImageDrawable(mContext.getResources().getDrawable(R.drawable.category_womens_clothing));
             }
             else if (mData.get(position).getRequestCategory().getCategory_name().toLowerCase().trim().startsWith("bag"))
             {
-                holder.image.setImageDrawable(mContext.getResources().getDrawable(R.drawable.category_bags));
+                holder.imageView.setImageDrawable(mContext.getResources().getDrawable(R.drawable.category_bags));
             }
             else if (mData.get(position).getRequestCategory().getCategory_name().toLowerCase().trim().startsWith("jew"))
             {
-                holder.image.setImageDrawable(mContext.getResources().getDrawable(R.drawable.category_womens_clothing));
+                holder.imageView.setImageDrawable(mContext.getResources().getDrawable(R.drawable.category_womens_clothing));
             }
             else if (mData.get(position).getRequestCategory().getCategory_name().toLowerCase().trim().startsWith("foot"))
             {
-                holder.image.setImageDrawable(mContext.getResources().getDrawable(R.drawable.category_footwear));
+                holder.imageView.setImageDrawable(mContext.getResources().getDrawable(R.drawable.category_footwear));
             }
             else if (mData.get(position).getRequestCategory().getCategory_name().toLowerCase().trim().startsWith("clo"))
             {
-                holder.image.setImageDrawable(mContext.getResources().getDrawable(R.drawable.category_clocks));
+                holder.imageView.setImageDrawable(mContext.getResources().getDrawable(R.drawable.category_clocks));
             }
         }
         else {
             ParseFile pf = mData.get(position).getRequestPhoto();
-            Glide.with(mContext).load(pf.getUrl()).asBitmap().centerCrop().placeholder(R.drawable.background_material).into(holder.image);
+            Glide.with(mContext).load(pf.getUrl()).asBitmap().centerCrop().placeholder(R.drawable.background_material).into(holder.imageView);
         }
 
         /*holder.title.setOnClickListener(new View.OnClickListener()
@@ -123,14 +126,16 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.VHCatego
     {
         public final TextView description;
         public final TextView budget;
-        public final ImageView image;
+        public final TextView deliveredBy;
+        public final CircleImageView imageView;
 
         public VHCategory(View view)
         {
             super(view);
-            description = (TextView) view.findViewById(R.id.req_description);
-            budget = (TextView) view.findViewById(R.id.req_budget);
-            image = (ImageView) view.findViewById(R.id.req_image);
+            description = (TextView) view.findViewById(R.id.eventName);
+            budget = (TextView) view.findViewById(R.id.eventLocation);
+            deliveredBy = (TextView) view.findViewById(R.id.startDate);
+            imageView = (CircleImageView) view.findViewById(R.id.request_image);
         }
     }
 }

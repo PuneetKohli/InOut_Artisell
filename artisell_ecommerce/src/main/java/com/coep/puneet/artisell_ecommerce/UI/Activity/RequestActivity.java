@@ -66,6 +66,7 @@ public class RequestActivity extends BaseActivity
         setSupportActionBar(actionBar);
         getSupportActionBar().setTitle("Requests");
         actionBar.canShowOverflowMenu();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override

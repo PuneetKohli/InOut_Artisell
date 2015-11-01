@@ -57,35 +57,35 @@ public class JobListAdapter extends RecyclerView.Adapter<JobListAdapter.VHArtisa
         {
             if(request.getRequestCategory().getCategory_name().toLowerCase().trim().startsWith("men"))
             {
-                holder.imageView.setImageDrawable(mContext.getResources().getDrawable(R.drawable.category_mens_clothing));
+                holder.imageView.setImageDrawable(mContext.getResources().getDrawable(R.drawable.men_clothing));
             }
             else if (request.getRequestCategory().getCategory_name().toLowerCase().trim().startsWith("wom"))
             {
-                holder.imageView.setImageDrawable(mContext.getResources().getDrawable(R.drawable.category_womens_clothing));
+                holder.imageView.setImageDrawable(mContext.getResources().getDrawable(R.drawable.women_clothing));
             }
             else if (request.getRequestCategory().getCategory_name().toLowerCase().trim().startsWith("bag"))
             {
-                holder.imageView.setImageDrawable(mContext.getResources().getDrawable(R.drawable.category_bags));
+                holder.imageView.setImageDrawable(mContext.getResources().getDrawable(R.drawable.bags));
             }
             else if (request.getRequestCategory().getCategory_name().toLowerCase().trim().startsWith("jew"))
             {
-                holder.imageView.setImageDrawable(mContext.getResources().getDrawable(R.drawable.category_jewelry));
+                holder.imageView.setImageDrawable(mContext.getResources().getDrawable(R.drawable.jewelry));
             }
             else if (request.getRequestCategory().getCategory_name().toLowerCase().trim().startsWith("foot"))
             {
-                holder.imageView.setImageDrawable(mContext.getResources().getDrawable(R.drawable.category_footwear));
+                holder.imageView.setImageDrawable(mContext.getResources().getDrawable(R.drawable.footwear));
             }
             else if (request.getRequestCategory().getCategory_name().toLowerCase().trim().startsWith("wall"))
             {
-                holder.imageView.setImageDrawable(mContext.getResources().getDrawable(R.drawable.category_clocks));
+                holder.imageView.setImageDrawable(mContext.getResources().getDrawable(R.drawable.clocks));
             }
             else if (request.getRequestCategory().getCategory_name().toLowerCase().trim().startsWith("pai"))
             {
-                holder.imageView.setImageDrawable(mContext.getResources().getDrawable(R.drawable.category_paintings));
+                holder.imageView.setImageDrawable(mContext.getResources().getDrawable(R.drawable.paintings));
             }
             else if (request.getRequestCategory().getCategory_name().toLowerCase().trim().startsWith("pot"))
             {
-                holder.imageView.setImageDrawable(mContext.getResources().getDrawable(R.drawable.category_pots));
+                holder.imageView.setImageDrawable(mContext.getResources().getDrawable(R.drawable.pots));
             }
         }
 

@@ -15,14 +15,18 @@
         <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:elevation="2dp"
+            android:theme="@style/AppTheme.AppBarOverlay"
             android:id="@+id/appbar">
             <!-- The ActionBar -->
             <include
                 android:id="@+id/toolbar"
                 layout="@layout/toolbar"
                 android:layout_width="match_parent"
+                android:elevation="2dp"
                 android:layout_height="wrap_content"
-                app:layout_scrollFlags="scroll|enterAlways"/>
+                app:layout_scrollFlags="scroll|enterAlways"
+                app:popupTheme="@style/AppTheme.PopupOverlay"/>
 
             <com.coep.puneet.artisell_ecommerce.Custom.SlidingTabLayout
                 android:id="@+id/sliding_tabs"
@@ -34,7 +38,6 @@
                 android:elevation="2dp"
                 />
         </android.support.design.widget.AppBarLayout>
-
         <android.support.v4.view.ViewPager
             android:layout_below="@+id/appbar"
             android:id="@+id/viewpager"
@@ -43,13 +46,14 @@
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             />
 
+
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
             android:layout_margin="@dimen/fab_margin"
-            android:src="@android:drawable/ic_dialog_email"/>
+            android:src="@drawable/ic_add_white_24dp"/>
 
     </android.support.design.widget.CoordinatorLayout>
 

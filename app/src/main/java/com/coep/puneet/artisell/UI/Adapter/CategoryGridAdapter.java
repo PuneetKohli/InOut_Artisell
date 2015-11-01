@@ -93,35 +93,35 @@ public class CategoryGridAdapter extends BaseAdapter
 
         if (categoryList.get(position).getCategory_name().toLowerCase().trim().startsWith("men"))
         {
-            imageView.setImageDrawable(mContext.getResources().getDrawable(R.drawable.category_mens_clothing));
+            imageView.setImageDrawable(mContext.getResources().getDrawable(R.drawable.men_clothing));
         }
         else if (categoryList.get(position).getCategory_name().toLowerCase().trim().startsWith("wom"))
         {
-            imageView.setImageDrawable(mContext.getResources().getDrawable(R.drawable.category_womens_clothing));
+            imageView.setImageDrawable(mContext.getResources().getDrawable(R.drawable.women_clothing));
         }
         else if (categoryList.get(position).getCategory_name().toLowerCase().trim().startsWith("bag"))
         {
-            imageView.setImageDrawable(mContext.getResources().getDrawable(R.drawable.category_bags));
+            imageView.setImageDrawable(mContext.getResources().getDrawable(R.drawable.bags));
         }
         else if (categoryList.get(position).getCategory_name().toLowerCase().trim().startsWith("jew"))
         {
-            imageView.setImageDrawable(mContext.getResources().getDrawable(R.drawable.category_jewelry));
+            imageView.setImageDrawable(mContext.getResources().getDrawable(R.drawable.jewelry));
         }
         else if (categoryList.get(position).getCategory_name().toLowerCase().trim().startsWith("foot"))
         {
-            imageView.setImageDrawable(mContext.getResources().getDrawable(R.drawable.category_footwear));
+            imageView.setImageDrawable(mContext.getResources().getDrawable(R.drawable.footwear));
         }
         else if (categoryList.get(position).getCategory_name().toLowerCase().trim().startsWith("wall"))
         {
-            imageView.setImageDrawable(mContext.getResources().getDrawable(R.drawable.category_clocks));
+            imageView.setImageDrawable(mContext.getResources().getDrawable(R.drawable.clocks));
         }
         else if (categoryList.get(position).getCategory_name().toLowerCase().trim().startsWith("pai"))
         {
-            imageView.setImageDrawable(mContext.getResources().getDrawable(R.drawable.category_paintings));
+            imageView.setImageDrawable(mContext.getResources().getDrawable(R.drawable.paintings));
         }
         else if (categoryList.get(position).getCategory_name().toLowerCase().trim().startsWith("pot"))
         {
-            imageView.setImageDrawable(mContext.getResources().getDrawable(R.drawable.category_pots));
+            imageView.setImageDrawable(mContext.getResources().getDrawable(R.drawable.pots));
         }
 
         return gridView;

@@ -160,6 +160,7 @@ public class RequestDetailed extends BaseActivity
         setSupportActionBar(actionBar);
         getSupportActionBar().setTitle("");
         actionBar.canShowOverflowMenu();
+        toolbar.setNavigationIcon(R.drawable.ic_close_white_24dp);
     }
 
     @Override

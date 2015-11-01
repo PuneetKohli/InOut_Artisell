@@ -60,35 +60,35 @@ public class AddProductStep_summary extends WizardStep
         {
             if (((AddProductActivity) getActivity()).manager.currentProduct.getCategory().getCategory_name().toLowerCase().trim().startsWith("men"))
             {
-                catImage.setImageDrawable(getResources().getDrawable(R.drawable.category_mens_clothing));
+                catImage.setImageDrawable(getResources().getDrawable(R.drawable.men_clothing));
             }
             else if (((AddProductActivity) getActivity()).manager.currentProduct.getCategory().getCategory_name().toLowerCase().trim().startsWith("wom"))
             {
-                catImage.setImageDrawable(getResources().getDrawable(R.drawable.category_womens_clothing));
+                catImage.setImageDrawable(getResources().getDrawable(R.drawable.women_clothing));
             }
             else if (((AddProductActivity) getActivity()).manager.currentProduct.getCategory().getCategory_name().toLowerCase().trim().startsWith("bag"))
             {
-                catImage.setImageDrawable(getResources().getDrawable(R.drawable.category_bags));
+                catImage.setImageDrawable(getResources().getDrawable(R.drawable.bags));
             }
             else if (((AddProductActivity) getActivity()).manager.currentProduct.getCategory().getCategory_name().toLowerCase().trim().startsWith("jew"))
             {
-                catImage.setImageDrawable(getResources().getDrawable(R.drawable.category_jewelry));
+                catImage.setImageDrawable(getResources().getDrawable(R.drawable.jewelry));
             }
             else if (((AddProductActivity) getActivity()).manager.currentProduct.getCategory().getCategory_name().toLowerCase().trim().startsWith("foot"))
             {
-                catImage.setImageDrawable(getResources().getDrawable(R.drawable.category_footwear));
+                catImage.setImageDrawable(getResources().getDrawable(R.drawable.footwear));
             }
             else if (((AddProductActivity) getActivity()).manager.currentProduct.getCategory().getCategory_name().toLowerCase().trim().startsWith("wall"))
             {
-                catImage.setImageDrawable(getResources().getDrawable(R.drawable.category_clocks));
+                catImage.setImageDrawable(getResources().getDrawable(R.drawable.clocks));
             }
             else if (((AddProductActivity) getActivity()).manager.currentProduct.getCategory().getCategory_name().toLowerCase().trim().startsWith("pai"))
             {
-                catImage.setImageDrawable(getResources().getDrawable(R.drawable.category_paintings));
+                catImage.setImageDrawable(getResources().getDrawable(R.drawable.paintings));
             }
             else if (((AddProductActivity) getActivity()).manager.currentProduct.getCategory().getCategory_name().toLowerCase().trim().startsWith("pot"))
             {
-                catImage.setImageDrawable(getResources().getDrawable(R.drawable.category_pots));
+                catImage.setImageDrawable(getResources().getDrawable(R.drawable.pots));
             }
         }
         return v;

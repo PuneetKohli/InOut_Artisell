@@ -22,8 +22,8 @@
         <!-- the ImageView for the icon -->
         <ImageView
             android:id="@+id/iv_cat_icon"
-            android:layout_width="125dp"
-            android:layout_height="125dp"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
             android:layout_centerHorizontal="true"
             android:layout_gravity="top|center"
             android:contentDescription="Description"
@@ -31,7 +31,7 @@
             android:focusableInTouchMode="false"
             android:padding="1dp"
             android:scaleType="fitXY"
-            android:src="@drawable/category_mens_clothing"/>
+            android:src="@drawable/jewelry"/>
 
         <!--  the TextView for the title -->
         <TextView
@@ -48,7 +48,7 @@
             android:text="Beauty &amp; Cosmetics"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textSize="12dp"
-            />
+            android:layout_marginTop="16dp"/>
 
     </LinearLayout>
 

@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
       xmlns:app="http://schemas.android.com/apk/res-auto">
     <item android:id="@+id/action_request"
-          android:icon="@android:drawable/ic_input_add"
+          android:icon="@drawable/ic_assignment_turned_in_white_24dp"
           android:orderInCategory="100"
           app:showAsAction="always"
           android:title="Go to Request Activity"/>

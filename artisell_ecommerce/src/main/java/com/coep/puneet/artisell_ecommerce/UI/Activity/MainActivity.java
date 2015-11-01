@@ -105,6 +105,7 @@ public class MainActivity extends BaseActivity implements TextView.OnEditorActio
     protected void setupLayout()
     {
         manager.delegate = this;
+        manager.loginCustomer("test@gmail.com", "password");
         searchText.clearFocus();
         searchText.setOnFocusChangeListener(new View.OnFocusChangeListener()
         {

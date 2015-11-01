@@ -56,7 +56,7 @@ public class RequestActivity extends BaseActivity
 
         mProgressBar = (ProgressBar) findViewById(R.id.progress_loading);
 
-        manager.loginCustomer("test@gmail.com", "password");
+        //manager.loginCustomer("test@gmail.com", "password");
     }
 
     @Override

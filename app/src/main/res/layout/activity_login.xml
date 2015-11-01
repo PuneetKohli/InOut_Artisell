@@ -80,6 +80,7 @@
                     android:lines="1"
                     android:maxLines="1"
                     android:minLines="1"
+                    android:visibility="invisible"
                     app:met_baseColor="@color/white"
                     app:met_floatingLabel="highlight"
                     app:met_floatingLabelText="@string/hint_password"

@@ -50,5 +50,6 @@
     <string name="title_activity_maps_activity_artisans">Map</string>
     <string name="action_done">save</string>
     <string name="title_activity_product_list">Search Results</string>
+    <string name="buy">buy</string>
 
 </resources>

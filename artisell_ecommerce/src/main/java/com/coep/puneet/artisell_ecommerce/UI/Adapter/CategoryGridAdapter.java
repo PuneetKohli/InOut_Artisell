@@ -73,10 +73,6 @@ public class CategoryGridAdapter extends BaseAdapter
         ImageView imageView = (ImageView) gridView
                 .findViewById(R.id.iv_cat_icon);
 
-        String curText = categoryList.get(position).getCategory_name();
-        TextView textView = (TextView) gridView.findViewById(R.id.tv_cat_name);
-        textView.setText(categoryList.get(position).getCategory_name());
-
         if(categoryList.get(position).getCategory_name().toLowerCase().trim().startsWith("men"))
         {
             imageView.setImageDrawable(mContext.getResources().getDrawable(R.drawable.category_mens_clothing));

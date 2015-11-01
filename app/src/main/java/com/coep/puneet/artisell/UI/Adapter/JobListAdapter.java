@@ -32,12 +32,12 @@ public class JobListAdapter extends RecyclerView.Adapter<JobListAdapter.VHArtisa
     @Override
     public JobListAdapter.VHArtisan onCreateViewHolder(ViewGroup parent, int viewType)
     {
-        final View view = LayoutInflater.from(mContext).inflate(R.layout.event_list_item, parent, false);
+        final View view = LayoutInflater.from(mContext).inflate(R.layout.request_list_item, parent, false);
         return new VHArtisan(view);
     }
 
     @Override
-    public void onBindViewHolder(JobListAdapter.VHArtisan holder, int position)
+    public void onBindViewHolder(JobListAdapter.VHArtisan holder, final int position)
     {
         Request request = jobsList.get(position);
         holder.description.setText(request.getRequestDescription());
@@ -51,6 +51,26 @@ public class JobListAdapter extends RecyclerView.Adapter<JobListAdapter.VHArtisa
 
         if (request.getRequestPhoto() != null)
             Glide.with(mContext).load(request.getRequestPhoto().getUrl()).asBitmap().centerCrop().into(holder.imageView);
+
+        holder.rejectView.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                jobsList.remove(position);
+                notifyItemRemoved(position);
+            }
+        });
+        holder.acceptView.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                /*jobsList.remove(position);
+                notifyItemRemoved(position);*/
+            }
+        });
+
     }
 
     @Override
@@ -65,6 +85,8 @@ public class JobListAdapter extends RecyclerView.Adapter<JobListAdapter.VHArtisa
         public final TextView description;
         public final TextView budget;
         public final TextView deliveredBy;
+        public final View rejectView;
+        public final View acceptView;
 
         public VHArtisan(View view)
         {
@@ -73,6 +95,8 @@ public class JobListAdapter extends RecyclerView.Adapter<JobListAdapter.VHArtisa
             budget = (TextView) view.findViewById(R.id.eventLocation);
             deliveredBy = (TextView) view.findViewById(R.id.startDate);
             imageView = (CircleImageView) view.findViewById(R.id.artisanProfilePic);
+            rejectView = view.findViewById(R.id.button_reject_request);
+            acceptView = view.findViewById(R.id.button_accept_request);
         }
     }
 }

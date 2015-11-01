@@ -57,8 +57,8 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_gravity="center_vertical"
-                android:scaleType="fitCenter"
-                android:src="@android:drawable/ic_menu_mapmode"/>
+                android:scaleType="centerInside"
+                android:src="@drawable/rupee"/>
 
             <TextView
                 android:id="@+id/eventLocation"
@@ -101,5 +101,42 @@
                 android:textAlignment="gravity"
                 android:layout_marginLeft="8dp"/>
         </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="16dp"
+        android:layout_weight="1"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+        <FrameLayout
+            android:id="@+id/button_reject_request"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="?attr/selectableItemBackground"
+            android:layout_weight="1">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:scaleType="centerCrop"
+                android:src="@drawable/red_cross"/>
+        </FrameLayout>
+        <FrameLayout
+            android:id="@+id/button_accept_request"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="?attr/selectableItemBackground"
+            android:layout_weight="1">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:scaleType="centerCrop"
+                android:src="@drawable/green_tick"/>
+        </FrameLayout>
     </LinearLayout>
 </LinearLayout>

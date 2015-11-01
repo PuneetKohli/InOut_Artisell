@@ -47,7 +47,7 @@ public class Request extends ParseObject
         return getDate("request_deliverby");
     }
 
-    public void setRequestDescription(Date date) {
+    public void setRequestDeliverBy(Date date) {
         put("request_deliverby", date);
     }
 

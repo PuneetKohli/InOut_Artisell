@@ -18,7 +18,6 @@ import com.coep.puneet.artisell_ecommerce.ParseObjects.Product;
 import com.coep.puneet.artisell_ecommerce.ParseObjects.Request;
 import com.parse.DeleteCallback;
 import com.parse.FindCallback;
-import com.parse.GetCallback;
 import com.parse.LogInCallback;
 import com.parse.Parse;
 import com.parse.ParseException;
@@ -490,15 +489,18 @@ public class AppManager extends Application
             {
                 if (e == null)
                 {
-                    for(int i = 0; i < objects.size(); i++)
+                    for (int i = 0; i < objects.size(); i++)
                     {
-                        if (objects.get(i).getRequestStatus() == 0) {
+                        if (objects.get(i).getRequestStatus() == 0)
+                        {
                             pendingList.add(objects.get(i));
                         }
-                        else if (objects.get(i).getRequestStatus() == 1) {
+                        else if (objects.get(i).getRequestStatus() == 1)
+                        {
                             acceptedList.add(objects.get(i));
                         }
-                        else {
+                        else
+                        {
                             doneList.add(objects.get(i));
                         }
                     }
@@ -541,10 +543,12 @@ public class AppManager extends Application
             @Override
             public void done(List<Product> objects, ParseException e)
             {
-                allProducts.clear();
-                allProducts.addAll(objects);
-                delegate.processFinish(LOG_TAG, AppConstants.RESULT_PRODUCT_LIST);
-
+                if(e == null)
+                {
+                    allProducts.clear();
+                    allProducts.addAll(objects);
+                    delegate.processFinish(LOG_TAG, AppConstants.RESULT_PRODUCT_LIST);
+                }
             }
         });
     }

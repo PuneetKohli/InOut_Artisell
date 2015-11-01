@@ -9,20 +9,21 @@ import android.widget.ImageView;
 
 import com.coep.puneet.artisell_ecommerce.ParseObjects.Category;
 import com.coep.puneet.artisell_ecommerce.R;
+import com.coep.puneet.artisell_ecommerce.UI.Activity.RequestDetailed;
 
 import java.util.ArrayList;
 
 /**
  * Created by Arun on 29-Oct-15.
  */
-public class CategoryGridAdapter extends BaseAdapter
+public class CategoryGridTickAdapter extends BaseAdapter
 {
     private Context mContext;
     private ArrayList<Category> categoryList;
     private int height;
     private int setTickPosition = -1;
 
-    public CategoryGridAdapter(Context mContext, ArrayList<Category> categoryList)
+    public CategoryGridTickAdapter(Context mContext, ArrayList<Category> categoryList)
     {
         this.mContext = mContext;
         this.categoryList = categoryList;
@@ -59,13 +60,21 @@ public class CategoryGridAdapter extends BaseAdapter
             gridView = new View(mContext);
 
             // get layout from mobile.xml
-            gridView = inflater.inflate(R.layout.category_grid_item, null);
+            gridView = inflater.inflate(R.layout.category_grid_item_tick, null);
             //imageView.setImageResource(mNavIds[position]);
             //imageView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, height / 4));
 
 
         } else {
             gridView = (View) convertView;
+        }
+
+        if(position == setTickPosition) {
+            gridView.findViewById(R.id.selected_tick).setVisibility(View.VISIBLE);
+            ((RequestDetailed) mContext).manager.currentProduct.setCategory(((RequestDetailed) mContext).manager.productCategories.get(position));
+        }
+        else {
+            gridView.findViewById(R.id.selected_tick).setVisibility(View.INVISIBLE);
         }
 
         // set image based on selected text

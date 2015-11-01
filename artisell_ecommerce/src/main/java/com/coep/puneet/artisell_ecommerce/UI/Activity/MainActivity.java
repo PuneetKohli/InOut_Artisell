@@ -79,6 +79,7 @@ public class MainActivity extends BaseActivity implements TextView.OnEditorActio
     }
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -154,7 +155,7 @@ public class MainActivity extends BaseActivity implements TextView.OnEditorActio
     public boolean onCreateOptionsMenu(Menu menu)
     {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_search, menu);
         return true;
     }
 
@@ -165,6 +166,10 @@ public class MainActivity extends BaseActivity implements TextView.OnEditorActio
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
+
+        if(id == R.id.action_request) {
+            navigator.openNewActivity(MainActivity.this, new RequestActivity());
+        }
 
         return super.onOptionsItemSelected(item);
     }

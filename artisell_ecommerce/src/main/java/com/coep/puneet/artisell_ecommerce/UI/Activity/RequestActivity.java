@@ -5,17 +5,18 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
 import com.coep.puneet.artisell_ecommerce.Custom.DividerItemDecoration;
+import com.coep.puneet.artisell_ecommerce.Custom.RecyclerItemClickListener;
 import com.coep.puneet.artisell_ecommerce.Custom.SlidingTabLayout;
 import com.coep.puneet.artisell_ecommerce.Global.AppConstants;
 import com.coep.puneet.artisell_ecommerce.Global.Utils;
@@ -78,7 +79,7 @@ public class RequestActivity extends BaseActivity
             @Override
             public void onClick(View view)
             {
-                Snackbar.make(view, "Add Request", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                navigator.openNewActivity(RequestActivity.this, new RequestDetailed());
                 //sendMessage("punkohl@gmail.com", 0);
                 //sendMessage("arunswaminathan94@gmail.com", 1);
                 //SendUnicodeSms.sendSms("7507118432", "You have received a new order. Please check the app");
@@ -192,6 +193,15 @@ public class RequestActivity extends BaseActivity
 
             RequestAdapter mAdapter = new RequestAdapter(mContext, reqdList);
             mRecyclerView.setAdapter(mAdapter);
+
+            mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(mContext, new RecyclerItemClickListener.OnItemClickListener()
+            {
+                @Override
+                public void onItemClick(View view, int position)
+                {
+                    Log.d("Test", position + "");
+                }
+            }));
 
            /* ArrayList<Category> subcategories = manager.categoryList.get(position).getSubcategories();
             final ArrayList<Category> subsubcategories = new ArrayList<>();

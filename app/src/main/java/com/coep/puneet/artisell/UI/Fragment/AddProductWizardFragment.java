@@ -335,7 +335,7 @@ public class AddProductWizardFragment extends WizardFragment
 
     public String getNextButtonLabel()
     {
-        return TextUtils.isEmpty(this.mNextButtonText) ? this.getResources().getString(org.codepond.wizardroid.R.string.action_next) : this.mNextButtonText;
+        return TextUtils.isEmpty(this.mNextButtonText) ? this.getResources().getString(R.string.action_go_ahead) : this.mNextButtonText;
     }
 
     public void setNextButtonText(String nextButtonText)
@@ -355,7 +355,7 @@ public class AddProductWizardFragment extends WizardFragment
 
     public String getBackButtonLabel()
     {
-        return TextUtils.isEmpty(this.mBackButtonText) ? this.getResources().getString(org.codepond.wizardroid.R.string.action_previous) : this.mBackButtonText;
+        return TextUtils.isEmpty(this.mBackButtonText) ? this.getResources().getString(R.string.action_go_back) : this.mBackButtonText;
     }
 
     public void setBackButtonText(String backButtonText)

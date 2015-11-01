@@ -6,7 +6,7 @@
               android:orientation="horizontal">
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/artisanProfilePic"
+        android:id="@+id/request_image"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_gravity="center_vertical"
@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:layout_marginLeft="16dp"
-        android:layout_weight="1"
+        android:layout_weight="0.8"
         android:gravity="center_vertical"
         android:orientation="vertical">
 
@@ -38,7 +38,6 @@
                 android:layout_alignParentTop="true"
                 android:ellipsize="end"
                 android:gravity="top"
-                android:maxLines="1"
                 android:text="Arun Swaminathan"
                 android:textStyle="bold"
                 android:textAlignment="gravity"
@@ -106,7 +105,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center_vertical"
-        android:layout_marginLeft="16dp"
         android:layout_weight="1"
         android:gravity="center_vertical"
         android:orientation="horizontal">

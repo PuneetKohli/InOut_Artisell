@@ -47,10 +47,45 @@ public class JobListAdapter extends RecyclerView.Adapter<JobListAdapter.VHArtisa
 
 
         holder.deliveredBy.setText(s + "");
-        holder.budget.setText("Rs" + request.getRequestBudget());
+        holder.budget.setText("Rs. " + request.getRequestBudget());
 
         if (request.getRequestPhoto() != null)
             Glide.with(mContext).load(request.getRequestPhoto().getUrl()).asBitmap().centerCrop().into(holder.imageView);
+        else
+        {
+            if(request.getRequestCategory().getCategory_name().toLowerCase().trim().startsWith("men"))
+            {
+                holder.imageView.setImageDrawable(mContext.getResources().getDrawable(R.drawable.category_mens_clothing));
+            }
+            else if (request.getRequestCategory().getCategory_name().toLowerCase().trim().startsWith("wom"))
+            {
+                holder.imageView.setImageDrawable(mContext.getResources().getDrawable(R.drawable.category_womens_clothing));
+            }
+            else if (request.getRequestCategory().getCategory_name().toLowerCase().trim().startsWith("bag"))
+            {
+                holder.imageView.setImageDrawable(mContext.getResources().getDrawable(R.drawable.category_bags));
+            }
+            else if (request.getRequestCategory().getCategory_name().toLowerCase().trim().startsWith("jew"))
+            {
+                holder.imageView.setImageDrawable(mContext.getResources().getDrawable(R.drawable.category_jewelry));
+            }
+            else if (request.getRequestCategory().getCategory_name().toLowerCase().trim().startsWith("foot"))
+            {
+                holder.imageView.setImageDrawable(mContext.getResources().getDrawable(R.drawable.category_footwear));
+            }
+            else if (request.getRequestCategory().getCategory_name().toLowerCase().trim().startsWith("wall"))
+            {
+                holder.imageView.setImageDrawable(mContext.getResources().getDrawable(R.drawable.category_clocks));
+            }
+            else if (request.getRequestCategory().getCategory_name().toLowerCase().trim().startsWith("pai"))
+            {
+                holder.imageView.setImageDrawable(mContext.getResources().getDrawable(R.drawable.category_paintings));
+            }
+            else if (request.getRequestCategory().getCategory_name().toLowerCase().trim().startsWith("pot"))
+            {
+                holder.imageView.setImageDrawable(mContext.getResources().getDrawable(R.drawable.category_pots));
+            }
+        }
 
         holder.rejectView.setOnClickListener(new View.OnClickListener()
         {
@@ -70,7 +105,6 @@ public class JobListAdapter extends RecyclerView.Adapter<JobListAdapter.VHArtisa
                 notifyItemRemoved(position);*/
             }
         });
-
     }
 
     @Override
@@ -94,7 +128,7 @@ public class JobListAdapter extends RecyclerView.Adapter<JobListAdapter.VHArtisa
             description = (TextView) view.findViewById(R.id.eventName);
             budget = (TextView) view.findViewById(R.id.eventLocation);
             deliveredBy = (TextView) view.findViewById(R.id.startDate);
-            imageView = (CircleImageView) view.findViewById(R.id.artisanProfilePic);
+            imageView = (CircleImageView) view.findViewById(R.id.request_image);
             rejectView = view.findViewById(R.id.button_reject_request);
             acceptView = view.findViewById(R.id.button_accept_request);
         }

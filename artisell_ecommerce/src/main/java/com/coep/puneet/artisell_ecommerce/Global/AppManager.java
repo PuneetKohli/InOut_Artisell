@@ -471,6 +471,7 @@ public class AppManager extends Application
             {
                 searchProducts.clear();
                 searchProducts.addAll(objects);
+                delegate.processFinish(LOG_TAG, AppConstants.RESULT_SEARCH_LIST);
             }
         });
     }

@@ -20,6 +20,7 @@ public final class AppConstants
     public static final String RESULT_PRODUCT_LIST = "resultProductList";
     public static final String RESULT_PRODUCT_LIST_ERROR = "resultProductListError";
     public static final String RESULT_LOGIN_SUCCESS = "resultLoginSuccess";
+    public static final String RESULT_SEARCH_LIST = "resultSearchList";
     public static final String RESULT_LOGIN_FAIL = "resultLoginFail";
     public static final String RESULT_ARTISAN = "resultArtisanList";
 

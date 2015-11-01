@@ -42,7 +42,7 @@ public class AppManager extends Application
     public Product currentProduct;
     public AsyncResponse delegate = null;
 
-    Locale myLocale;
+    public Locale myLocale;
     static boolean localeChanged;
 
     ConnectivityManager cm;
@@ -72,7 +72,7 @@ public class AppManager extends Application
         if (!"".equals(lang) && !getBaseContext().getResources().getConfiguration().locale.getLanguage().equals(lang))
         {
             Log.d("Manager", "Setting locale to " + lang);
-            locale = new Locale(lang);
+            myLocale = new Locale(lang);
             Resources res = getResources();
             DisplayMetrics dm = res.getDisplayMetrics();
             Configuration conf = res.getConfiguration();
@@ -83,17 +83,16 @@ public class AppManager extends Application
         }
     }
 
-    private Locale locale = null;
 
     @Override
     public void onConfigurationChanged(Configuration newConfig)
     {
         super.onConfigurationChanged(newConfig);
         Log.d("Manager", "Configuration changed");
-        if (locale != null)
+        if (myLocale != null)
         {
-            newConfig.locale = locale;
-            Locale.setDefault(locale);
+            newConfig.locale = myLocale;
+            Locale.setDefault(myLocale);
             getBaseContext().getResources().updateConfiguration(newConfig, getBaseContext().getResources().getDisplayMetrics());
         }
     }

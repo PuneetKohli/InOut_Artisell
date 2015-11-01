@@ -22,7 +22,7 @@ import com.coep.puneet.artisell_ecommerce.UI.Adapter.ProductListAdapter;
 import butterknife.Bind;
 import butterknife.OnClick;
 
-public class ClarifaiActivity extends BaseActivity
+public class MainActivity extends BaseActivity
 {
     @Bind(R.id.newProductsRecycler) RecyclerView mRecyclerView;
     @Bind(R.id.category_grid_view) ExpandableHeightGridView navGrid;
@@ -88,7 +88,7 @@ public class ClarifaiActivity extends BaseActivity
             public void onItemClick(View view, int position)
             {
                 manager.currentProduct = manager.allProducts.get(position);
-                navigator.openNewActivity(ClarifaiActivity.this, new ProductDetailedActivity());
+                navigator.openNewActivity(MainActivity.this, new ProductDetailedActivity());
             }
         }));
 
@@ -155,7 +155,7 @@ public class ClarifaiActivity extends BaseActivity
             case AppConstants.RESULT_PRODUCT_LIST:
                 if (manager.allProducts.size() != 0)
                 {
-                    mAdapter = new ProductListAdapter(ClarifaiActivity.this, manager.allProducts);
+                    mAdapter = new ProductListAdapter(MainActivity.this, manager.allProducts);
                     mRecyclerView.setAdapter(mAdapter);
                     mAdapter.notifyDataSetChanged();
                 }

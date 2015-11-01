@@ -86,15 +86,39 @@
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="30dp"
                 android:fontFamily="sans-serif-light"
                 android:text="New Arrivals!"
-                android:textSize="16sp"/>
+                android:textSize="16sp"
+                android:layout_gravity="bottom"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:gravity="bottom"/>
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/newProductsRecycler"
                 android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:fontFamily="sans-serif-light"
+                android:text="Categories"
+                android:textSize="16sp"
+                android:layout_gravity="bottom"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:gravity="bottom"
+                android:id="@+id/textView2"/>
+            <com.coep.puneet.artisell_ecommerce.Custom.ExpandableHeightGridView
+                android:id="@+id/category_grid_view"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:gravity="center"
+                android:numColumns="4"
                 />
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>

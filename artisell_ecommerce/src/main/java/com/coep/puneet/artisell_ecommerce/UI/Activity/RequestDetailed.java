@@ -22,8 +22,10 @@ import com.coep.puneet.artisell_ecommerce.Global.AppConstants;
 import com.coep.puneet.artisell_ecommerce.ParseObjects.Request;
 import com.coep.puneet.artisell_ecommerce.R;
 import com.coep.puneet.artisell_ecommerce.UI.Adapter.CategoryGridTickAdapter;
+import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -63,7 +65,7 @@ public class RequestDetailed extends BaseActivity
     @OnClick(R.id.button_save) void save() {
         request.setCustomer(ParseUser.getCurrentUser());
         request.setRequestBudget(seekBar.getWidth());
-
+        request.setRequestStatus(0);
         if(currentCategoryPos != -1)
         {
             request.setRequestCategory(manager.productCategories.get(currentCategoryPos));
@@ -80,6 +82,19 @@ public class RequestDetailed extends BaseActivity
             Toast.makeText(this, "Please Enter Description", Toast.LENGTH_SHORT).show();
 
         }
+
+        request.getRequestPhoto().saveInBackground(new SaveCallback()
+        {
+            @Override
+            public void done(ParseException e)
+            {
+                request.saveEventually();
+                Toast.makeText(RequestDetailed.this, "Your Request has been accepted", Toast.LENGTH_SHORT).show();
+                manager.pendingList.add(request);
+                finish();
+            }
+        });
+
         //request.setRequestDeliverBy(new Date());
        /* if(parseFile != null)
         {
@@ -149,7 +164,7 @@ public class RequestDetailed extends BaseActivity
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser)
             {
-                budget.setText(""+progress);
+                budget.setText("" + progress);
             }
 
             @Override

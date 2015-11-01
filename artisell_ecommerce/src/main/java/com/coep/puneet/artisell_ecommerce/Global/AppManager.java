@@ -543,8 +543,9 @@ public class AppManager extends Application
             @Override
             public void done(List<Product> objects, ParseException e)
             {
-                if(e == null)
+                if (e == null)
                 {
+                    ParseObject.pinAllInBackground(objects);
                     allProducts.clear();
                     allProducts.addAll(objects);
                     delegate.processFinish(LOG_TAG, AppConstants.RESULT_PRODUCT_LIST);
@@ -552,6 +553,28 @@ public class AppManager extends Application
             }
         });
     }
+
+    public void getAllProductsLocal()
+    {
+        ParseQuery<Product> query = Product.getQuery();
+        query.include("product_category");
+        query.fromLocalDatastore();
+        query.findInBackground(new FindCallback<Product>()
+        {
+            @Override
+            public void done(List<Product> objects, ParseException e)
+            {
+                if(e == null)
+                {
+                    allProducts.clear();
+                    allProducts.addAll(objects);
+                    delegate.processFinish(LOG_TAG, AppConstants.RESULT_PRODUCT_LIST);
+                    getAllProducts();
+                }
+            }
+        });
+    }
+
 
     public void getAllProductsOfCategory(Category category)
     {

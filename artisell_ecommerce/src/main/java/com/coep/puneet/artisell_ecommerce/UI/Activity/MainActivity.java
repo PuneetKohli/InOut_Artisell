@@ -85,8 +85,6 @@ public class MainActivity extends BaseActivity implements TextView.OnEditorActio
     {
         super.onCreate(savedInstanceState);
 
-        manager.getAllProducts();
-        manager.getAllCategory();
     }
 
     @Override
@@ -106,6 +104,9 @@ public class MainActivity extends BaseActivity implements TextView.OnEditorActio
     {
         manager.delegate = this;
         manager.loginCustomer("test@gmail.com", "password");
+
+        manager.getAllProductsLocal();
+        manager.getAllCategoryLocal();
         searchText.clearFocus();
         searchText.setOnFocusChangeListener(new View.OnFocusChangeListener()
         {

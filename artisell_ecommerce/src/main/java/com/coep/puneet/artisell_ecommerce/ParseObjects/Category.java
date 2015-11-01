@@ -1,6 +1,7 @@
 package com.coep.puneet.artisell_ecommerce.ParseObjects;
 
 import com.parse.ParseClassName;
+import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
@@ -10,7 +11,15 @@ public class Category extends ParseObject
 
     public String getCategory_name()
     {
-        return getString("category_name");
+        try
+        {
+            fetchIfNeeded();
+            return getString("category_name");
+        } catch (ParseException e)
+        {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public void setCategory_name(String category_name)

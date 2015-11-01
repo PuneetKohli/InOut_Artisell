@@ -232,6 +232,11 @@ public class AddProductStep3_image extends WizardStep
                     ((AddProductActivity) getActivity()).manager.currentProduct.addProductTags(tag.getName());
                     Log.e("lol", tag.getName());
                 }
+                String prName = ((AddProductActivity) getActivity()).manager.currentProduct.getProduct_name();
+                prName = prName.toLowerCase();
+                String[] temp = prName.split(" ");
+                for(int i = 0; i < temp.length; i++)
+                    ((AddProductActivity) getActivity()).manager.currentProduct.addProductTags(temp[i]);
             } else {
                 Log.e("lol", "Clarifai: " + result.getStatusMessage());
             }

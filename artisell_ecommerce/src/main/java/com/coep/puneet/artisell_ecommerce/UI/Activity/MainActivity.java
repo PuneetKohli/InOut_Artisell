@@ -14,7 +14,6 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -37,6 +36,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import butterknife.Bind;
 import butterknife.OnClick;
@@ -45,6 +45,7 @@ public class MainActivity extends BaseActivity implements TextView.OnEditorActio
 {
     @Bind(R.id.newProductsRecycler) RecyclerView mRecyclerView;
     @Bind(R.id.category_grid_view) ExpandableHeightGridView navGrid;
+    @Bind(R.id.et_search) EditText searchText;
 
     Bitmap bm;
     private final ClarifaiClient client = new ClarifaiClient(APP_ID, APP_SECRET);
@@ -52,6 +53,7 @@ public class MainActivity extends BaseActivity implements TextView.OnEditorActio
     private static final String APP_SECRET = "qFNVrIR411_-zR6ssALK_5UuB9QwcHx6RprHBGbb";
     ProductListAdapter mAdapter;
     LinearLayoutManager mLayoutManager;
+
 
     @OnClick(R.id.button_image_search)
     void imageSearch()
@@ -66,9 +68,16 @@ public class MainActivity extends BaseActivity implements TextView.OnEditorActio
     {
         Log.d("Test", "Test clicked search button");
         //Do image search!
+        String tags = searchText.getText().toString();
+        String[] temp = tags.split(" ");
+        ArrayList<String> temp1 = new ArrayList<>();
+        Collections.addAll(temp1, temp);
+
+        manager.tagSearch(temp1);
+        navigator.openNewActivity(MainActivity.this, new ProductListActivity());
+
     }
 
-    @Bind(R.id.et_search) EditText editTextSearch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -95,8 +104,8 @@ public class MainActivity extends BaseActivity implements TextView.OnEditorActio
     protected void setupLayout()
     {
         manager.delegate = this;
-        editTextSearch.clearFocus();
-        editTextSearch.setOnFocusChangeListener(new View.OnFocusChangeListener()
+        searchText.clearFocus();
+        searchText.setOnFocusChangeListener(new View.OnFocusChangeListener()
         {
             @Override
             public void onFocusChange(View v, boolean hasFocus)

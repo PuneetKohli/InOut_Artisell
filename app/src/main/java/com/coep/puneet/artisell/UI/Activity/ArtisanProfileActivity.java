@@ -125,7 +125,7 @@ public class ArtisanProfileActivity extends BaseActivity
         addressIcon.setImageDrawable(getResources().getDrawable(R.drawable.ic_map_grey_24dp));
 
         ParseFile profile_image = manager.currentArtisanSelected.getParseFile("profile_image");
-        Glide.with(this).load(profile_image.getUrl()).asBitmap().centerCrop().placeholder(R.drawable.background_material).into(profileImage);
+        Glide.with(this).load(profile_image.getUrl()).asBitmap().centerCrop().placeholder(R.mipmap.ic_launcher).into(profileImage);
     }
 
     String field = "";

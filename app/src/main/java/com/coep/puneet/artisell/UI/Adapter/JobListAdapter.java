@@ -53,7 +53,7 @@ public class JobListAdapter extends RecyclerView.Adapter<JobListAdapter.VHArtisa
         holder.budget.setText("Rs. " + request.getRequestBudget());
 
         if (request.getRequestPhoto() != null)
-            Glide.with(mContext).load(request.getRequestPhoto().getUrl()).asBitmap().centerCrop().into(holder.imageView);
+            Glide.with(mContext).load(request.getRequestPhoto().getUrl()).asBitmap().centerCrop().placeholder(R.mipmap.ic_launcher).into(holder.imageView);
         else
         {
             if(request.getRequestCategory().getCategory_name().toLowerCase().trim().startsWith("men"))

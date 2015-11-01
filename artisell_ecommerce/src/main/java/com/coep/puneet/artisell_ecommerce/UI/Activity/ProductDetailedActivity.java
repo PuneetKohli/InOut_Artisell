@@ -120,7 +120,7 @@ public class ProductDetailedActivity extends BaseActivity
         productQuantity.setText("" + manager.currentProduct.getProductQuantity());
         ParseFile image = manager.currentProduct.getProductImage();
         String url = image.getUrl();
-        Picasso.with(ProductDetailedActivity.this).load(url).placeholder(R.drawable.ab_background).into(productImage);
+        Picasso.with(ProductDetailedActivity.this).load(url).placeholder(R.mipmap.ic_launcher).into(productImage);
         Log.d("ProductDetail", "Image is : " + productImage);
         if (manager.currentProduct.getCategory() == null)
         {

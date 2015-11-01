@@ -74,7 +74,7 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         ParseFile image = product.getProductImage();
         String url = image.getUrl();
         //holder.image.setImageResource(R.drawable.blogspot);
-        Glide.with(mContext).load(url).asBitmap().centerCrop().placeholder(R.drawable.ab_background).into(holder.image);
+        Glide.with(mContext).load(url).asBitmap().centerCrop().placeholder(R.mipmap.ic_launcher).into(holder.image);
     }
 
     @Override

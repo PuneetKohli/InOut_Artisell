@@ -47,7 +47,7 @@ public class ArtisanListAdapter extends RecyclerView.Adapter<ArtisanListAdapter.
         holder.name.setText(user.getString("name"));
         holder.category.setText(user.getString("primary_category"));
         holder.location.setText(user.getString("location"));
-        Glide.with(mContext).load(user.getParseFile("profile_image").getUrl()).asBitmap().centerCrop().placeholder(R.drawable.photo).into(holder.image);
+        Glide.with(mContext).load(user.getParseFile("profile_image").getUrl()).asBitmap().centerCrop().placeholder(R.mipmap.ic_launcher).into(holder.image);
 
         holder.buttonCall.setOnClickListener(new View.OnClickListener()
         {

@@ -104,7 +104,7 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.VHCatego
         }
         else {
             ParseFile pf = mData.get(position).getRequestPhoto();
-            Glide.with(mContext).load(pf.getUrl()).asBitmap().centerCrop().placeholder(R.drawable.background_material).into(holder.imageView);
+            Glide.with(mContext).load(pf.getUrl()).asBitmap().centerCrop().placeholder(R.mipmap.ic_launcher).into(holder.imageView);
         }
 
         /*holder.title.setOnClickListener(new View.OnClickListener()

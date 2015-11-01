@@ -101,15 +101,23 @@ public class CategoryGridAdapter extends BaseAdapter
         }
         else if (categoryList.get(position).getCategory_name().toLowerCase().trim().startsWith("jew"))
         {
-            imageView.setImageDrawable(mContext.getResources().getDrawable(R.drawable.category_womens_clothing));
+            imageView.setImageDrawable(mContext.getResources().getDrawable(R.drawable.category_jewelry));
         }
         else if (categoryList.get(position).getCategory_name().toLowerCase().trim().startsWith("foot"))
         {
             imageView.setImageDrawable(mContext.getResources().getDrawable(R.drawable.category_footwear));
         }
-        else if (categoryList.get(position).getCategory_name().toLowerCase().trim().startsWith("clo"))
+        else if (categoryList.get(position).getCategory_name().toLowerCase().trim().startsWith("wall"))
         {
             imageView.setImageDrawable(mContext.getResources().getDrawable(R.drawable.category_clocks));
+        }
+        else if (categoryList.get(position).getCategory_name().toLowerCase().trim().startsWith("pai"))
+        {
+            imageView.setImageDrawable(mContext.getResources().getDrawable(R.drawable.category_paintings));
+        }
+        else if (categoryList.get(position).getCategory_name().toLowerCase().trim().startsWith("pot"))
+        {
+            imageView.setImageDrawable(mContext.getResources().getDrawable(R.drawable.category_pots));
         }
 
         return gridView;

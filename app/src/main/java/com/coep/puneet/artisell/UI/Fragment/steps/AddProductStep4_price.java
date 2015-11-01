@@ -37,8 +37,14 @@ public class AddProductStep4_price extends WizardStep
             public void onInit(int status)
             {
                 if (status == TextToSpeech.SUCCESS && tts != null) {
-
-                    say(getString(R.string.description_add_price));
+                    if ((getResources().getConfiguration().locale.getLanguage().equals("hi")))
+                    {
+                        say("Kripaya apne utpod ko name dey. Ya likhnay kay jaga screen kay knee chay dee yay gay yay chitruh ko doba kay bolay ");
+                    }
+                    else
+                    {
+                        say(getString(R.string.description_add_price));
+                    }
                     //
                     // OnUtteranceCompletedListener
                     //

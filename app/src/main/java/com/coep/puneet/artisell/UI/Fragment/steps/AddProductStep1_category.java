@@ -41,8 +41,14 @@ public class AddProductStep1_category extends WizardStep
             {
                 if (status == TextToSpeech.SUCCESS && tts != null)
                 {
-
-                    say(getString(R.string.description_select_category));
+                    if ((getResources().getConfiguration().locale.getLanguage().equals("hi")))
+                    {
+                        say("Kripaya neechay deeyay gayay chitro may say apnay utpod kay chitra ko chunae");
+                    }
+                    else
+                    {
+                        say(getString(R.string.description_select_category));
+                    }
                     //
                     // OnUtteranceCompletedListener
                     //

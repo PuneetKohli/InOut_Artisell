@@ -88,8 +88,14 @@ public class AddProductStep3_image extends WizardStep
             public void onInit(int status)
             {
                 if (status == TextToSpeech.SUCCESS && tts != null) {
-
-                    say(getString(R.string.description_upload_image));
+                    if ((getResources().getConfiguration().locale.getLanguage().equals("hi")))
+                    {
+                        say("Kripaya apne utpod ke chitrh kheechay ya gallery say dahliyey");
+                    }
+                    else
+                    {
+                        say(getString(R.string.description_upload_image));
+                    }
                     //
                     // OnUtteranceCompletedListener
                     //

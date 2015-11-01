@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -67,6 +68,39 @@ public class ArtisanListAdapter extends RecyclerView.Adapter<ArtisanListAdapter.
                 n.openNewActivity(mContext, new ArtisanProfileActivity());
             }
         });
+
+        if(user.getString("primary_category").toLowerCase().trim().startsWith("men"))
+        {
+            holder.categoryImage.setImageDrawable(mContext.getResources().getDrawable(R.drawable.category_mens_clothing));
+        }
+        else if (user.getString("primary_category").toLowerCase().trim().startsWith("wom"))
+        {
+            holder.categoryImage.setImageDrawable(mContext.getResources().getDrawable(R.drawable.category_womens_clothing));
+        }
+        else if (user.getString("primary_category").toLowerCase().trim().startsWith("bag"))
+        {
+            holder.categoryImage.setImageDrawable(mContext.getResources().getDrawable(R.drawable.category_bags));
+        }
+        else if (user.getString("primary_category").toLowerCase().trim().startsWith("jew"))
+        {
+            holder.categoryImage.setImageDrawable(mContext.getResources().getDrawable(R.drawable.category_jewelry));
+        }
+        else if (user.getString("primary_category").toLowerCase().trim().startsWith("foot"))
+        {
+            holder.categoryImage.setImageDrawable(mContext.getResources().getDrawable(R.drawable.category_footwear));
+        }
+        else if (user.getString("primary_category").toLowerCase().trim().startsWith("wall"))
+        {
+            holder.categoryImage.setImageDrawable(mContext.getResources().getDrawable(R.drawable.category_clocks));
+        }
+        else if (user.getString("primary_category").toLowerCase().trim().startsWith("pai"))
+        {
+            holder.categoryImage.setImageDrawable(mContext.getResources().getDrawable(R.drawable.category_paintings));
+        }
+        else if (user.getString("primary_category").toLowerCase().trim().startsWith("pot"))
+        {
+            holder.categoryImage.setImageDrawable(mContext.getResources().getDrawable(R.drawable.category_pots));
+        }
     }
 
     @Override
@@ -82,6 +116,7 @@ public class ArtisanListAdapter extends RecyclerView.Adapter<ArtisanListAdapter.
         public final TextView location;
         public final CircleImageView image;
         public final View buttonCall;
+        public final ImageView categoryImage;
 
         public VHArtisan(View view)
         {
@@ -91,6 +126,7 @@ public class ArtisanListAdapter extends RecyclerView.Adapter<ArtisanListAdapter.
             location = (TextView) view.findViewById(R.id.artisanLocation);
             image = (CircleImageView) view.findViewById(R.id.artisanProfilePic);
             buttonCall = view.findViewById(R.id.button_call_other_artisan);
+            categoryImage = (ImageView) view.findViewById(R.id.category_image);
         }
     }
 }

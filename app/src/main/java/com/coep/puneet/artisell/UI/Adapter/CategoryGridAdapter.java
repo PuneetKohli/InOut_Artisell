@@ -51,49 +51,47 @@ public class CategoryGridAdapter extends BaseAdapter
     @Override
     public View getView(int position, View convertView, ViewGroup parent)
     {
-        LayoutInflater inflater = (LayoutInflater) mContext
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         View gridView;
 
-        if (convertView == null) {
-
+        if (convertView == null)
+        {
             gridView = new View(mContext);
-
             // get layout from mobile.xml
             gridView = inflater.inflate(R.layout.category_grid_item, null);
             //imageView.setImageResource(mNavIds[position]);
             //imageView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, height / 4));
-
-
-        } else {
+        }
+        else
+        {
             gridView = (View) convertView;
         }
 
         TextView textView = (TextView) gridView.findViewById(R.id.tv_cat_name);
 
-        if(setTickPosition != -1)
+        if (setTickPosition != -1)
         {
-        if(position == setTickPosition) {
-            textView.setTextColor(mContext.getResources().getColor(R.color.app_primary));
-            gridView.findViewById(R.id.selected_tick).setVisibility(View.VISIBLE);
-            ((AddProductActivity) mContext).manager.currentProduct.setCategory(((AddProductActivity) mContext).manager.productCategories.get(position));
-        }
-        else
-        {
-            textView.setTextColor(mContext.getResources().getColor(android.R.color.secondary_text_light_nodisable));
-            gridView.findViewById(R.id.selected_tick).setVisibility(View.INVISIBLE);
-        }
+            if (position == setTickPosition)
+            {
+                textView.setTextColor(mContext.getResources().getColor(R.color.app_primary));
+                gridView.findViewById(R.id.selected_tick).setVisibility(View.VISIBLE);
+                ((AddProductActivity) mContext).manager.currentProduct.setCategory(((AddProductActivity) mContext).manager.productCategories.get(position));
+            }
+            else
+            {
+                textView.setTextColor(mContext.getResources().getColor(android.R.color.secondary_text_light_nodisable));
+                gridView.findViewById(R.id.selected_tick).setVisibility(View.INVISIBLE);
+            }
         }
 
         // set image based on selected text
-        ImageView imageView = (ImageView) gridView
-                .findViewById(R.id.iv_cat_icon);
+        ImageView imageView = (ImageView) gridView.findViewById(R.id.iv_cat_icon);
 
         String curText = categoryList.get(position).getCategory_name();
         textView.setText(categoryList.get(position).getCategory_name());
 
-        if(categoryList.get(position).getCategory_name().toLowerCase().trim().startsWith("men"))
+        if (categoryList.get(position).getCategory_name().toLowerCase().trim().startsWith("men"))
         {
             imageView.setImageDrawable(mContext.getResources().getDrawable(R.drawable.category_mens_clothing));
         }

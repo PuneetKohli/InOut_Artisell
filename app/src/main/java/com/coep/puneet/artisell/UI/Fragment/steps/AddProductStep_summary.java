@@ -24,6 +24,7 @@ public class AddProductStep_summary extends WizardStep
     @Bind(R.id.tv_product_price) TextView productPrice;
     @Bind(R.id.image_product_img) ImageView productImage;
     @Bind(R.id.tv_product_category) TextView productCategory;
+    @Bind(R.id.tv_product_quantity) TextView productQuantity;
     @Bind(R.id.tv_keypoints) TextView productTags;
     @Bind(R.id.iv_product_category) ImageView catImage;
 
@@ -40,9 +41,10 @@ public class AddProductStep_summary extends WizardStep
         ButterKnife.bind(this, v);
 
         productName.setText(((AddProductActivity) getActivity()).manager.currentProduct.getProduct_name());
-        productPrice.setText(((AddProductActivity) getActivity()).manager.currentProduct.getProductPrice() + "");
+        productPrice.setText("Rs. " + ((AddProductActivity) getActivity()).manager.currentProduct.getProductPrice() + "");
         productImage.setImageBitmap(((AddProductActivity) getActivity()).manager.currentBm);
         productCategory.setText(((AddProductActivity) getActivity()).manager.currentProduct.getCategory().getCategory_name());
+        productQuantity.setText(""+((AddProductActivity) getActivity()).manager.currentProduct.getProductQuantity());
         ArrayList<String> tags = ((AddProductActivity) getActivity()).manager.currentProduct.getProductTags();
         String keypoints = "";
         if (tags.size() > 0)

@@ -54,7 +54,7 @@ public class HomeActivity extends BaseActivity
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
         int height1 = metrics.heightPixels;
         String[] mNavLabels = {getString(R.string.home_button_1), getString(R.string.home_button_2), getString(R.string.home_button_3), getString(R.string.home_button_4), getString(R.string.home_button_5), getString(R.string.home_button_6), getString(R.string.home_button_7), getString(R.string.home_button_8)};
-        Integer[] mNavIds = {R.drawable.home_view_product, R.drawable.home_add_product, R.drawable.home_convert_language, R.drawable.home_my_profile, R.drawable.home_other_artisans, R.drawable.home_event, R.drawable.home_job_search, R.drawable.home_other};
+        Integer[] mNavIds = {R.drawable.home_view_product, R.drawable.home_add_product, R.drawable.home_convert_language, R.drawable.home_my_profile, R.drawable.home_other_artisans, R.drawable.home_event, R.drawable.home_job_search, R.drawable.bs_ic_more_light};
 
         navGrid.setAdapter(new NavGridAdapter(this, mNavIds, mNavLabels, height1));
         navGrid.setExpanded(true);

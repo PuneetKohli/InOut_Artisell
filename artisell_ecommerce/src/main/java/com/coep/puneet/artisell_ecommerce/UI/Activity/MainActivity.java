@@ -1,5 +1,6 @@
 package com.coep.puneet.artisell_ecommerce.UI.Activity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
@@ -53,11 +54,20 @@ public class MainActivity extends BaseActivity implements TextView.OnEditorActio
     private static final String APP_SECRET = "qFNVrIR411_-zR6ssALK_5UuB9QwcHx6RprHBGbb";
     ProductListAdapter mAdapter;
     LinearLayoutManager mLayoutManager;
+    ProgressDialog mProgressBar;
 
 
     @OnClick(R.id.button_image_search)
     void imageSearch()
     {
+        mProgressBar = new ProgressDialog(MainActivity.this);
+
+        mProgressBar.setTitle("Performing Image Search...");
+        mProgressBar.setMessage("Image search in progress ...");
+        mProgressBar.setProgressStyle(mProgressBar.STYLE_SPINNER);
+        mProgressBar.setProgress(0);
+        mProgressBar.setMax(20);
+        mProgressBar.show();
         Log.d("Test", "Test");
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         startActivityForResult(intent, AppConstants.REQUEST_CAMERA);
@@ -103,6 +113,7 @@ public class MainActivity extends BaseActivity implements TextView.OnEditorActio
     @Override
     protected void setupLayout()
     {
+
         manager.delegate = this;
         manager.loginCustomer("test@gmail.com", "password");
 
@@ -284,6 +295,7 @@ public class MainActivity extends BaseActivity implements TextView.OnEditorActio
     }
 
     private void updateUIForResult(RecognitionResult result) {
+        mProgressBar.dismiss();
         if (result != null) {
             ArrayList<String> tags = new ArrayList<>();
             if (result.getStatusCode() == RecognitionResult.StatusCode.OK) {

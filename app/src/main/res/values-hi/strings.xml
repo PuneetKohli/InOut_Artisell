@@ -50,4 +50,6 @@
     <string name="action_done">सुरक्षित करें</string>
     <string name="title_activity_jobs_activity">वर्तमान नौकरियाँ</string>
     <string name="or">या</string>
+    <string name="action_go_ahead">आगे</string>
+    <string name="action_go_back">पीछे</string>
 </resources>

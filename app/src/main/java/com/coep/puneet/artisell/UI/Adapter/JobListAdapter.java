@@ -94,8 +94,11 @@ public class JobListAdapter extends RecyclerView.Adapter<JobListAdapter.VHArtisa
             @Override
             public void onClick(View v)
             {
-                jobsList.remove(position);
-                notifyItemRemoved(position);
+                if(position < jobsList.size())
+                {
+                    jobsList.remove(position);
+                    notifyItemRemoved(position);
+                }
             }
         });
         holder.acceptView.setOnClickListener(new View.OnClickListener()
@@ -108,8 +111,11 @@ public class JobListAdapter extends RecyclerView.Adapter<JobListAdapter.VHArtisa
                 //SendUnicodeSms.sendSms("7507118432", "Your request has been accepted. Please check the app for the status");
                 ((JobActivity) mContext).manager.jobsList.get(position).setRequestStatus(1);
                 ((JobActivity) mContext).manager.jobsList.get(position).saveEventually();
-                jobsList.remove(position);
-                notifyItemRemoved(position);
+                if(position < jobsList.size())
+                {
+                    jobsList.remove(position);
+                    notifyItemRemoved(position);
+                }
                 Toast.makeText(mContext, "You have succesfully accepted the job", Toast.LENGTH_SHORT).show();
             }
         });

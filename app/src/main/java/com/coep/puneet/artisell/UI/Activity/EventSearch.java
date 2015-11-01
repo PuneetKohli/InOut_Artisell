@@ -5,10 +5,8 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 
-import com.coep.puneet.artisell.Custom.RecyclerItemClickListener;
 import com.coep.puneet.artisell.R;
 import com.coep.puneet.artisell.UI.Adapter.EventListAdapter;
 
@@ -61,17 +59,6 @@ public class EventSearch extends BaseActivity
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
-
-
-        mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(this, new RecyclerItemClickListener.OnItemClickListener()
-        {
-            @Override
-            public void onItemClick(View view, int position)
-            {
-                manager.currentArtisanSelected = manager.artisanList.get(position);
-                navigator.openNewActivity(EventSearch.this, new ArtisanProfileActivity());
-            }
-        }));
 
     }
 

@@ -42,7 +42,6 @@ public class LoginActivity extends BaseActivity
             manager.getAllProductsFromCurrentArtisanOffline();
             manager.getAllArtisansLocal();
             openNextActivity();
-
         }
     }
 

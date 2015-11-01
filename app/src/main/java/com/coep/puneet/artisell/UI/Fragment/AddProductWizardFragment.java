@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.coep.puneet.artisell.ParseObjects.Category;
 import com.coep.puneet.artisell.ParseObjects.Product;
@@ -309,7 +310,7 @@ public class AddProductWizardFragment extends WizardFragment
             @Override
             public void done(ParseException e)
             {
-                if(e == null)
+                if (e == null)
                 {
                     product.saveEventually(new SaveCallback()
                     {
@@ -321,11 +322,13 @@ public class AddProductWizardFragment extends WizardFragment
                         }
                     });
                 }
-                else {
+                else
+                {
                     //Toast.makeText(getActivity(), "Unable to save product to server in offline mode, you can view it offline for the time being", Toast.LENGTH_SHORT).show();
                 }
             }
         });
+        Toast.makeText(getActivity(), "Your Product has been saved", Toast.LENGTH_SHORT).show();
 
         getActivity().finish();
     }

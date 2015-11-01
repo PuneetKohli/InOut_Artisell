@@ -57,7 +57,7 @@
                 android:layout_height="20dp"
                 android:layout_gravity="center_vertical"
                 android:scaleType="fitCenter"
-                android:src="@android:drawable/ic_delete"/>
+                android:src="@android:drawable/ic_menu_mapmode"/>
 
             <TextView
                 android:id="@+id/eventLocation"
@@ -70,7 +70,8 @@
                 android:ellipsize="end"
                 android:gravity="bottom"
                 android:text="Mohit Nimbalkar"
-                android:textAlignment="gravity"/>
+                android:textAlignment="gravity"
+                android:layout_marginLeft="8dp"/>
         </LinearLayout>
 
         <LinearLayout
@@ -85,7 +86,7 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:scaleType="fitCenter"
-                android:src="@android:drawable/ic_delete"/>
+                android:src="@android:drawable/ic_menu_my_calendar"/>
 
             <TextView
                 android:id="@+id/startDate"
@@ -96,7 +97,8 @@
                 android:ellipsize="end"
                 android:gravity="bottom"
                 android:text="Mohit Nimbalkar"
-                android:textAlignment="gravity"/>
+                android:textAlignment="gravity"
+                android:layout_marginLeft="8dp"/>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

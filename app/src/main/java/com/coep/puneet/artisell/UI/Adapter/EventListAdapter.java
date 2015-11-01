@@ -21,7 +21,6 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.VHAr
     {
         this.mContext = mContext;
         this.artisanList = artisanList;
-
     }
 
     @Override

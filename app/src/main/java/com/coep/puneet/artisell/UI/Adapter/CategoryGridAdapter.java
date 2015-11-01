@@ -70,13 +70,20 @@ public class CategoryGridAdapter extends BaseAdapter
             gridView = (View) convertView;
         }
 
+        TextView textView = (TextView) gridView.findViewById(R.id.tv_cat_name);
 
+        if(setTickPosition != -1)
+        {
         if(position == setTickPosition) {
+            textView.setTextColor(mContext.getResources().getColor(R.color.app_primary));
             gridView.findViewById(R.id.selected_tick).setVisibility(View.VISIBLE);
             ((AddProductActivity) mContext).manager.currentProduct.setCategory(((AddProductActivity) mContext).manager.productCategories.get(position));
         }
-        else {
+        else
+        {
+            textView.setTextColor(mContext.getResources().getColor(android.R.color.secondary_text_light_nodisable));
             gridView.findViewById(R.id.selected_tick).setVisibility(View.INVISIBLE);
+        }
         }
 
         // set image based on selected text
@@ -84,7 +91,6 @@ public class CategoryGridAdapter extends BaseAdapter
                 .findViewById(R.id.iv_cat_icon);
 
         String curText = categoryList.get(position).getCategory_name();
-        TextView textView = (TextView) gridView.findViewById(R.id.tv_cat_name);
         textView.setText(categoryList.get(position).getCategory_name());
 
         if(categoryList.get(position).getCategory_name().toLowerCase().trim().startsWith("men"))

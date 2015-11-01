@@ -2,6 +2,7 @@ package com.coep.puneet.artisell.UI.Activity;
 
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.view.ViewCompat;
@@ -29,6 +30,7 @@ public class ProductDetailedActivity extends BaseActivity
     @Bind(R.id.tv_product_category) TextView productCategory;
     @Bind(R.id.tv_product_quantity) TextView productQuantity;
     @Bind(R.id.tv_keypoints) TextView productTags;
+    @Bind(R.id.iv_product_category) ImageView catImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -72,6 +74,38 @@ public class ProductDetailedActivity extends BaseActivity
             keypoints += tags.get(tags.size() - 1);
         }
         productTags.setText(keypoints);
+        if(manager.currentProduct.getCategory().getCategory_name().toLowerCase().trim().startsWith("men"))
+        {
+            catImage.setImageDrawable(getResources().getDrawable(R.drawable.category_mens_clothing));
+        }
+        else if (manager.currentProduct.getCategory().getCategory_name().toLowerCase().trim().startsWith("wom"))
+        {
+            catImage.setImageDrawable(getResources().getDrawable(R.drawable.category_womens_clothing));
+        }
+        else if (manager.currentProduct.getCategory().getCategory_name().toLowerCase().trim().startsWith("bag"))
+        {
+            catImage.setImageDrawable(getResources().getDrawable(R.drawable.category_bags));
+        }
+        else if (manager.currentProduct.getCategory().getCategory_name().toLowerCase().trim().startsWith("jew"))
+        {
+            catImage.setImageDrawable(getResources().getDrawable(R.drawable.category_jewelry));
+        }
+        else if (manager.currentProduct.getCategory().getCategory_name().toLowerCase().trim().startsWith("foot"))
+        {
+            catImage.setImageDrawable(getResources().getDrawable(R.drawable.category_footwear));
+        }
+        else if (manager.currentProduct.getCategory().getCategory_name().toLowerCase().trim().startsWith("wall"))
+        {
+            catImage.setImageDrawable(getResources().getDrawable(R.drawable.category_clocks));
+        }
+        else if (manager.currentProduct.getCategory().getCategory_name().toLowerCase().trim().startsWith("pai"))
+        {
+            catImage.setImageDrawable(getResources().getDrawable(R.drawable.category_paintings));
+        }
+        else if (manager.currentProduct.getCategory().getCategory_name().toLowerCase().trim().startsWith("pot"))
+        {
+            catImage.setImageDrawable(getResources().getDrawable(R.drawable.category_pots));
+        }
     }
 
 }

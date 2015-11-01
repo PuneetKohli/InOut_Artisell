@@ -37,6 +37,7 @@ public class EventSearch extends BaseActivity
     protected void setupToolbar()
     {
         getSupportActionBar().setTitle(getString(R.string.title_activity_maps_activity_event));
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override

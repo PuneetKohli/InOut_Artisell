@@ -23,6 +23,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="?attr/selectableItemBackground"
             >
 
             <TextView
@@ -56,6 +57,7 @@
             android:id="@+id/layout_next_button"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:background="?attr/selectableItemBackground"
             android:layout_weight="1"
             >
 

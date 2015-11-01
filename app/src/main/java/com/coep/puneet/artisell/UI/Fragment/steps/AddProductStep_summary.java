@@ -25,6 +25,7 @@ public class AddProductStep_summary extends WizardStep
     @Bind(R.id.image_product_img) ImageView productImage;
     @Bind(R.id.tv_product_category) TextView productCategory;
     @Bind(R.id.tv_keypoints) TextView productTags;
+    @Bind(R.id.iv_product_category) ImageView catImage;
 
     //You must have an empty constructor for every step
     public AddProductStep_summary()
@@ -53,7 +54,41 @@ public class AddProductStep_summary extends WizardStep
             keypoints += tags.get(tags.size() - 1);
         }
         productTags.setText(keypoints);
-
+        if(((AddProductActivity) getActivity()).manager.currentProduct.getCategory() != null)
+        {
+            if (((AddProductActivity) getActivity()).manager.currentProduct.getCategory().getCategory_name().toLowerCase().trim().startsWith("men"))
+            {
+                catImage.setImageDrawable(getResources().getDrawable(R.drawable.category_mens_clothing));
+            }
+            else if (((AddProductActivity) getActivity()).manager.currentProduct.getCategory().getCategory_name().toLowerCase().trim().startsWith("wom"))
+            {
+                catImage.setImageDrawable(getResources().getDrawable(R.drawable.category_womens_clothing));
+            }
+            else if (((AddProductActivity) getActivity()).manager.currentProduct.getCategory().getCategory_name().toLowerCase().trim().startsWith("bag"))
+            {
+                catImage.setImageDrawable(getResources().getDrawable(R.drawable.category_bags));
+            }
+            else if (((AddProductActivity) getActivity()).manager.currentProduct.getCategory().getCategory_name().toLowerCase().trim().startsWith("jew"))
+            {
+                catImage.setImageDrawable(getResources().getDrawable(R.drawable.category_jewelry));
+            }
+            else if (((AddProductActivity) getActivity()).manager.currentProduct.getCategory().getCategory_name().toLowerCase().trim().startsWith("foot"))
+            {
+                catImage.setImageDrawable(getResources().getDrawable(R.drawable.category_footwear));
+            }
+            else if (((AddProductActivity) getActivity()).manager.currentProduct.getCategory().getCategory_name().toLowerCase().trim().startsWith("wall"))
+            {
+                catImage.setImageDrawable(getResources().getDrawable(R.drawable.category_clocks));
+            }
+            else if (((AddProductActivity) getActivity()).manager.currentProduct.getCategory().getCategory_name().toLowerCase().trim().startsWith("pai"))
+            {
+                catImage.setImageDrawable(getResources().getDrawable(R.drawable.category_paintings));
+            }
+            else if (((AddProductActivity) getActivity()).manager.currentProduct.getCategory().getCategory_name().toLowerCase().trim().startsWith("pot"))
+            {
+                catImage.setImageDrawable(getResources().getDrawable(R.drawable.category_pots));
+            }
+        }
         return v;
     }
 

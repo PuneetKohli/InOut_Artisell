@@ -6,7 +6,7 @@ import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-
+import com.coep.puneet.artisell_ecommerce.Global.SendUnicodeSms;
 import com.coep.puneet.artisell_ecommerce.Global.Utils;
 import com.coep.puneet.artisell_ecommerce.R;
 import com.github.sendgrid.SendGrid;
@@ -37,10 +37,10 @@ public class ProductDetailedActivity extends BaseActivity
     void click()
     {
         //Buy item
-        //sendMessage("punkohl@gmail.com", 0);
-        //sendMessage("arunswaminathan94@gmail.com", 1);
-        //SendUnicodeSms.sendSms("7507118432", "You have received a new order. Please check the app");
-        //SendUnicodeSms.sendSms("9819954448", "Congratulation on purchasing the product. Your order is being processed");
+        sendMessage("arunswaminathan94@gmail.com", 0);
+        sendMessage("punkohl@gmail.com", 1);
+        SendUnicodeSms.sendSms("9819954448", "You have received a new order. Please check the app");
+        SendUnicodeSms.sendSms("7507118432", "Congratulation on purchasing the product. Your order is being processed currently");
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.example.arun.artisell_ecommerce.UI.Activity;
+package com.coep.puneet.artisell_ecommerce.UI.Activity;
 
 
 import android.content.Context;
@@ -15,13 +15,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
-import com.example.arun.artisell_ecommerce.Custom.DividerItemDecoration;
-import com.example.arun.artisell_ecommerce.Custom.SlidingTabLayout;
-import com.example.arun.artisell_ecommerce.Global.AppConstants;
-import com.example.arun.artisell_ecommerce.Global.Utils;
-import com.example.arun.artisell_ecommerce.ParseObjects.Request;
-import com.example.arun.artisell_ecommerce.R;
-import com.example.arun.artisell_ecommerce.UI.Adapter.RequestAdapter;
+import com.coep.puneet.artisell_ecommerce.Custom.DividerItemDecoration;
+import com.coep.puneet.artisell_ecommerce.Custom.SlidingTabLayout;
+import com.coep.puneet.artisell_ecommerce.Global.AppConstants;
+import com.coep.puneet.artisell_ecommerce.Global.Utils;
+import com.coep.puneet.artisell_ecommerce.ParseObjects.Request;
+import com.coep.puneet.artisell_ecommerce.R;
+import com.coep.puneet.artisell_ecommerce.UI.Adapter.RequestAdapter;
 import com.github.sendgrid.SendGrid;
 
 import java.util.ArrayList;

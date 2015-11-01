@@ -1,4 +1,4 @@
-package com.example.arun.artisell_ecommerce.Global;
+package com.coep.puneet.artisell_ecommerce.Global;
 
 
 public class Utils

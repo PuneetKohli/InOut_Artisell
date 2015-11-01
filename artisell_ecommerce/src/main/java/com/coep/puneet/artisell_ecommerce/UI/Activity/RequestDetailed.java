@@ -1,6 +1,7 @@
 package com.coep.puneet.artisell_ecommerce.UI.Activity;
 
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -9,9 +10,11 @@ import android.provider.MediaStore;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.SeekBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.coep.puneet.artisell_ecommerce.Custom.ExpandableHeightGridView;
@@ -26,7 +29,10 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 import butterknife.Bind;
 import butterknife.OnClick;
@@ -39,9 +45,14 @@ public class RequestDetailed extends BaseActivity
     @Bind(R.id.seekBarBudget) SeekBar seekBar;
     @Bind(R.id.editText_requestdescription) EditText requestDescription;
     @Bind(R.id.editText_deliveredby) EditText deliveredBy;
+    @Bind(R.id.textview_budget) TextView budget;
+
+    private DatePickerDialog fromDatePickerDialog;
+    private SimpleDateFormat dateFormatter;
+    Date date;
 
     @OnClick(R.id.editText_deliveredby) void openDateDialog() {
-
+        fromDatePickerDialog.show();
     }
 
     @OnClick(R.id.upload_button) void takePhoto() {
@@ -69,7 +80,7 @@ public class RequestDetailed extends BaseActivity
             Toast.makeText(this, "Please Enter Description", Toast.LENGTH_SHORT).show();
 
         }
-        request.setRequestDeliverBy(new Date());
+        //request.setRequestDeliverBy(new Date());
        /* if(parseFile != null)
         {
             request.getRequestPhoto().saveInBackground(new SaveCallback()
@@ -130,6 +141,30 @@ public class RequestDetailed extends BaseActivity
                 mAdapter.updateView(position);
             }
         });
+        dateFormatter = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
+        setDateTimeField();
+
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener()
+        {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser)
+            {
+                budget.setText(""+progress);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar)
+            {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar)
+            {
+
+            }
+        });
+
     }
     @Override public void onActivityResult(int requestCode, int resultCode, Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);
@@ -169,6 +204,21 @@ public class RequestDetailed extends BaseActivity
                 Toast.makeText(this, "Unable to load Image", Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    private void setDateTimeField() {
+
+        Calendar newCalendar = Calendar.getInstance();
+        fromDatePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                Calendar date = Calendar.getInstance();
+                date.set(year, monthOfYear, dayOfMonth);
+                deliveredBy.setText(dateFormatter.format(date.getTime()));
+                request.setRequestDeliverBy(date.getTime());
+            }
+
+        },newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
     }
 
 }

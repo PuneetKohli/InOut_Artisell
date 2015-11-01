@@ -65,7 +65,8 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:text="50:"
+                        android:id="@+id/textview_budget"
+                        android:text="50"
                         android:textSize="16sp"
                         android:layout_weight="0"
                         android:layout_marginRight="16dp"
@@ -87,7 +88,6 @@
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:hint="Tap to select Date"
-                    android:inputType="date"
                     />
 
                 <com.coep.puneet.artisell_ecommerce.Custom.ExpandableHeightGridView

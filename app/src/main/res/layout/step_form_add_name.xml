@@ -34,8 +34,8 @@
             android:layout_gravity="center">
             <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:src="@android:drawable/ic_btn_speak_now"
+                android:layout_height="match_parent"
+                android:src="@drawable/listen"
                 android:layout_gravity="center"/>
         </FrameLayout>
     </LinearLayout>
@@ -66,9 +66,11 @@
         android:layout_margin="16dp"
         android:clickable="true"
         app:borderWidth="0dp"
+        android:elevation="1dp"
         app:fabSize="normal"
+        android:scaleType="center"
         app:layout_anchorGravity="bottom|right|end"
-        android:src="@android:drawable/ic_btn_speak_now"
+        android:src="@drawable/speak"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"/>
 

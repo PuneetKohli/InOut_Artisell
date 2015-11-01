@@ -34,8 +34,8 @@
             android:layout_gravity="center">
             <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:src="@android:drawable/ic_btn_speak_now"
+                android:layout_height="match_parent"
+                android:src="@drawable/listen"
                 android:layout_gravity="center"/>
         </FrameLayout>
     </LinearLayout>
@@ -53,10 +53,12 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/textView"
-            android:layout_margin="16dp"
             android:layout_weight="1"
             android:background="?attr/selectableItemBackground"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="16dp">
 
             <TextView
                 android:layout_width="match_parent"
@@ -81,15 +83,25 @@
 
         </LinearLayout>
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/or"
+            android:textSize="20dp"
+            android:layout_gravity="center"
+            android:gravity="top|center_horizontal"/>
+
         <LinearLayout
             android:id="@+id/layout_add_image_from_gallery"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/textView"
-            android:layout_margin="16dp"
             android:layout_weight="1"
             android:background="?attr/selectableItemBackground"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginRight="16dp">
 
             <TextView
                 android:layout_width="match_parent"
@@ -122,7 +134,8 @@
         android:layout_alignRight="@+id/container_layout_menu"
         android:layout_alignTop="@+id/container_layout_menu"
         android:layout_margin="16dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:visibility="invisible">
 
         <ImageView
             android:id="@+id/image_preview"

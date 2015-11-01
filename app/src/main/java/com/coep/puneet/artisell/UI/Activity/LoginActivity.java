@@ -1,8 +1,6 @@
 package com.coep.puneet.artisell.UI.Activity;
 
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,6 +9,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.coep.puneet.artisell.Global.AppConstants;
+import com.coep.puneet.artisell.Global.SendUnicodeSms;
 import com.coep.puneet.artisell.R;
 import com.parse.ParseUser;
 
@@ -22,16 +21,34 @@ public class LoginActivity extends BaseActivity
     @Bind(R.id.loginButtonFrame) FrameLayout mLoginButtonFrame;
     @Bind(R.id.loginButton) Button mLoginButton;
     @Bind(R.id.editText_phone_no) EditText mPhoneEditText;
+    @Bind(R.id.editText_password) EditText editTextOTP;
     @Bind(R.id.progress_login) ProgressBar mProgressLogin;
 
 
     @OnClick(R.id.loginButton)
     void login()
     {
-        mLoginButton.setText("");
-        mProgressLogin.setVisibility(View.VISIBLE);
-        manager.loginArtisan(mPhoneEditText.getText().toString());
-
+        if(mLoginButton.getText().toString().equals("Send OTP")) {
+            if(mPhoneEditText.getText().toString().length() == 10) {
+                sendOtpSMS();
+                showOtpField();
+                Toast.makeText(LoginActivity.this, "Your OTP has been sent, please enter it below", Toast.LENGTH_SHORT).show();
+                mLoginButton.setText("Login");
+            }
+        }
+        else
+        {
+            if (editTextOTP.getText().toString().equals("5490"))
+            {
+                mLoginButton.setText("");
+                mProgressLogin.setVisibility(View.VISIBLE);
+                manager.loginArtisan(mPhoneEditText.getText().toString());
+            }
+            else
+            {
+                Toast.makeText(LoginActivity.this, "Please enter the correct OTP", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
     @Override
@@ -62,8 +79,8 @@ public class LoginActivity extends BaseActivity
     protected void setupLayout()
     {
         manager.delegate = this;
-
-        mPhoneEditText.addTextChangedListener(new TextWatcher()
+        mLoginButton.setText("Send OTP");
+        /*mPhoneEditText.addTextChangedListener(new TextWatcher()
         {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after)
@@ -90,7 +107,7 @@ public class LoginActivity extends BaseActivity
                     }
                 }
             }
-        });
+        });*/
 
         manager.getAllCategoryLocal();
         manager.getAllEventsLocal();
@@ -105,17 +122,14 @@ public class LoginActivity extends BaseActivity
 
     void sendOtpSMS()
     {
-        /*SmsManager smsManager = SmsManager.getDefault();
-        smsManager.sendTextMessage("+919819954448", null, "OTP is 5490", null, null);*/
-        //SendUnicodeSms.sendSms("9819954448");
+        SendUnicodeSms.sendSms("9819954448", "OTP is 5490");
+        SendUnicodeSms.sendSms("7507118432", "OTP is 5490");
     }
 
     void showOtpField()
     {
-/*        mImageValidate.setVisibility(View.VISIBLE);
-        mProgressValidate.setVisibility(View.GONE);
-        mPasswordEditText.setVisibility(View.VISIBLE);
-        mLoginButtonFrame.setVisibility(View.VISIBLE);*/
+
+        editTextOTP.setVisibility(View.VISIBLE);
 
     }
 

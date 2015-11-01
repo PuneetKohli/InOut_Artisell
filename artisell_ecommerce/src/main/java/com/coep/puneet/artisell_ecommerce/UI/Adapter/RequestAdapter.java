@@ -2,10 +2,10 @@ package com.coep.puneet.artisell_ecommerce.UI.Adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -72,7 +72,9 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.VHCatego
     {
         holder.description.setText(mData.get(position).getRequestDescription());
         holder.budget.setText("Rs " + mData.get(position).getRequestBudget());
-        holder.deliveredBy.setText("" + mData.get(position).getRequestDeliverBy().toString());
+        String s = "" + DateUtils.getRelativeTimeSpanString(mData.get(position).getRequestDeliverBy().getTime(), System.currentTimeMillis(), 0);
+        s = s.replace("minute", "min");
+        holder.deliveredBy.setText(s);
         if(mData.get(position).getRequestPhoto() == null) {
 
             if(mData.get(position).getRequestCategory().getCategory_name().toLowerCase().trim().startsWith("men"))

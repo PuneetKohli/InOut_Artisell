@@ -22,7 +22,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.coep.puneet.artisell_ecommerce.UI.Activity.MainActivity"
+            android:name=".UI.Activity.ClarifaiActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>

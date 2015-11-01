@@ -32,7 +32,7 @@ import java.util.ArrayList;
 import butterknife.Bind;
 import butterknife.OnClick;
 
-public class MainActivity extends BaseActivity
+public class ClarifaiActivity extends BaseActivity
 {
     private static final String APP_ID = "fT_vdVp2I1INwwolmoF5G_cG2gbnRONmS4QnZpgH";
     private static final String APP_SECRET = "qFNVrIR411_-zR6ssALK_5UuB9QwcHx6RprHBGbb";

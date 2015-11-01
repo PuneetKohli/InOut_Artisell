@@ -72,9 +72,15 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.VHCatego
     {
         holder.description.setText(mData.get(position).getRequestDescription());
         holder.budget.setText("Rs " + mData.get(position).getRequestBudget());
-        String s = "" + DateUtils.getRelativeTimeSpanString(mData.get(position).getRequestDeliverBy().getTime(), System.currentTimeMillis(), 0);
-        s = s.replace("minute", "min");
-        holder.deliveredBy.setText(s);
+        if(mData.get(position).getRequestDeliverBy() != null)
+        {
+            String s = "" + DateUtils.getRelativeTimeSpanString(mData.get(position).getRequestDeliverBy().getTime(), System.currentTimeMillis(), 0);
+            s = s.replace("minute", "min");
+            holder.deliveredBy.setText(s);
+        }
+        else {
+            holder.deliveredBy.setText("N/A");
+        }
         if(mData.get(position).getRequestPhoto() == null) {
 
             if(mData.get(position).getRequestCategory().getCategory_name().toLowerCase().trim().startsWith("men"))

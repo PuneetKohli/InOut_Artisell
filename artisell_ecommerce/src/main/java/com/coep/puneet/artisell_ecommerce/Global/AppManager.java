@@ -489,6 +489,9 @@ public class AppManager extends Application
             {
                 if (e == null)
                 {
+                    pendingList.clear();
+                    acceptedList.clear();
+                    doneList.clear();
                     for (int i = 0; i < objects.size(); i++)
                     {
                         if (objects.get(i).getRequestStatus() == 0)

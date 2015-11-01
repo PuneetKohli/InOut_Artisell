@@ -15,7 +15,7 @@ import com.coep.puneet.artisell_ecommerce.UI.Adapter.ProductListAdapter;
 import butterknife.Bind;
 import butterknife.OnClick;
 
-public class MainActivity extends BaseActivity
+public class ClarifaiActivity extends BaseActivity
 {
     @Bind(R.id.newProductsRecycler) RecyclerView mRecyclerView;
 

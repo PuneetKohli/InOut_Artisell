@@ -52,48 +52,70 @@ public class RequestDetailed extends BaseActivity
     private DatePickerDialog fromDatePickerDialog;
     private SimpleDateFormat dateFormatter;
     Date date;
+    int budgetProgress = 0;
 
-    @OnClick(R.id.editText_deliveredby) void openDateDialog() {
+    @OnClick(R.id.editText_deliveredby)
+    void openDateDialog()
+    {
         fromDatePickerDialog.show();
     }
 
-    @OnClick(R.id.upload_button) void takePhoto() {
+    @OnClick(R.id.upload_button)
+    void takePhoto()
+    {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         startActivityForResult(intent, AppConstants.REQUEST_CAMERA);
     }
 
-    @OnClick(R.id.button_save) void save() {
+    @OnClick(R.id.button_save)
+    void save()
+    {
         request.setCustomer(ParseUser.getCurrentUser());
-        request.setRequestBudget(seekBar.getWidth());
         request.setRequestStatus(0);
-        if(currentCategoryPos != -1)
+        request.setRequestBudget(budgetProgress);
+
+        if (currentCategoryPos != -1)
         {
             request.setRequestCategory(manager.productCategories.get(currentCategoryPos));
         }
-        else {
+        else
+        {
             Toast.makeText(this, "Please Select a Category", Toast.LENGTH_SHORT).show();
         }
 
-        if(!requestDescription.getText().toString().equals(""))
+        if (!requestDescription.getText().toString().equals(""))
         {
             request.setRequestDescription(requestDescription.getText().toString());
         }
-        else {
+        else
+        {
             Toast.makeText(this, "Please Enter Description", Toast.LENGTH_SHORT).show();
 
         }
 
-        request.getRequestPhoto().saveInBackground(new SaveCallback()
+        if (parseFile != null)
         {
-            @Override
-            public void done(ParseException e)
+            request.getRequestPhoto().saveInBackground(new SaveCallback()
             {
-                request.saveEventually();
-                Toast.makeText(RequestDetailed.this, "Your Request has been accepted", Toast.LENGTH_SHORT).show();
-                manager.pendingList.add(request);
-                finish();
-            }
-        });
+                @Override
+                public void done(ParseException e)
+                {
+                    request.saveEventually();
+                    Toast.makeText(RequestDetailed.this, "Your Request has been accepted", Toast.LENGTH_SHORT).show();
+                    manager.pendingList.add(request);
+                    finish();
+                    finish();
+                }
+            });
+        }
+        else
+        {
+            request.saveEventually();
+            Toast.makeText(RequestDetailed.this, "Your Request has been accepted", Toast.LENGTH_SHORT).show();
+            manager.pendingList.add(request);
+            finish();
+            finish();
+        }
 
         //request.setRequestDeliverBy(new Date());
        /* if(parseFile != null)
@@ -158,13 +180,17 @@ public class RequestDetailed extends BaseActivity
         });
         dateFormatter = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
         setDateTimeField();
-
+        budget.setText("5000");
+        seekBar.incrementProgressBy(50);
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener()
         {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser)
             {
-                budget.setText("" + progress);
+                budgetProgress = progress;
+                budgetProgress = progress / 50;
+                budgetProgress = progress * 50;
+                budget.setText("" + budgetProgress);
             }
 
             @Override
@@ -181,12 +207,17 @@ public class RequestDetailed extends BaseActivity
         });
 
     }
-    @Override public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent intent)
+    {
         super.onActivityResult(requestCode, resultCode, intent);
-        if (resultCode == RESULT_OK) {
+        if (resultCode == RESULT_OK)
+        {
             // The user picked an image. Send it to Clarifai for recognition.
             //Log.d("", "User picked image: " + intent.getData());
-            if (requestCode == AppConstants.REQUEST_CAMERA) {
+            if (requestCode == AppConstants.REQUEST_CAMERA)
+            {
                 bm = (Bitmap) intent.getExtras().get("data");
                 ByteArrayOutputStream bytes = new ByteArrayOutputStream();
                 assert bm != null;
@@ -201,13 +232,15 @@ public class RequestDetailed extends BaseActivity
                     fo = new FileOutputStream(destination);
                     fo.write(bytes.toByteArray());
                     fo.close();
-                } catch (IOException e)
+                }
+                catch (IOException e)
                 {
                     e.printStackTrace();
                 }
             }
 
-            if (bm != null) {
+            if (bm != null)
+            {
                 requestImage.setImageBitmap(bm);
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
                 bm.compress(Bitmap.CompressFormat.JPEG, 90, stream);
@@ -215,25 +248,30 @@ public class RequestDetailed extends BaseActivity
                 parseFile = new ParseFile(byteArray);
                 request.setRequestPhoto(parseFile);
 
-            } else {
+            }
+            else
+            {
                 Toast.makeText(this, "Unable to load Image", Toast.LENGTH_SHORT).show();
             }
         }
     }
 
-    private void setDateTimeField() {
+    private void setDateTimeField()
+    {
 
         Calendar newCalendar = Calendar.getInstance();
-        fromDatePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+        fromDatePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener()
+        {
 
-            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth)
+            {
                 Calendar date = Calendar.getInstance();
                 date.set(year, monthOfYear, dayOfMonth);
                 deliveredBy.setText(dateFormatter.format(date.getTime()));
                 request.setRequestDeliverBy(date.getTime());
             }
 
-        },newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
+        }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
     }
 
 }
